@@ -2,20 +2,7 @@
 
 @section('container')
 <div class="container marketing">
-    <h1>Category Editor Menu</h1>
-    <form method="post" action="/category/create">
-      @csrf
-      <div class="mb-3">
-        <label for="title" class="form-label">Create Category Name</label>
-      @error('title')
-            <p class="text-danger">{{ $message }}</p>
-        @enderror
-      <input type="text" class="form-control" id="name" name="name" autofocus value="{{ old('name') }}">
-      </div>
-    <button type="submit" class="btn btn-primary">Create New Category</button>
-    </form>
-    <br>
-
+  <a href="/facility/create" class="btn btn-primary mb-3 mt-3">Add new facility</a>
 <div class="table-responsive">
   @if (session()->has('success'))
   <div class="alert alert-success" role="alert">
@@ -32,16 +19,18 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($category as $item)
+        @foreach ($facility as $item)
         <tr>
             <td>{{ $loop->iteration }}</td>
-            <td>{{ $item['name'] }}</td>
+            <td>{{ $item['title'] }}</td>
             <td>{{ $item['created_at'] }}</td>
             <td>
-                <form action="/category/delete/{{ $item['id'] }}" method="post" class="d-inline">
+              <a href="/facilty/detail/{{ $item['id'] }}" class="badge bg-info"><i class="bi bi-eye"></i></a>
+              <a href="/facilty/{{ $item['id'] }}/edit" class="badge bg-warning"><i class="bi bi-pencil"></i></a>
+                <form action="/facility/delete/{{ $item['id'] }}" method="post" class="d-inline">
                   @method('delete')
                   @csrf
-                  <button class="badge bg-danger border-0" onclick="return confirm('Are you sure?')">Delete</button>
+                  <button class="badge bg-danger border-0" onclick="return confirm('Are you sure?')"><i class="bi bi-trash"></i></button>
                 </form>
             </td>
           </tr>

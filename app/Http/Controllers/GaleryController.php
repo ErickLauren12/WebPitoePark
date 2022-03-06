@@ -17,7 +17,7 @@ class GaleryController extends Controller
     {
         return view('galery.index',[
             'title'=>'Galery',
-            "result" => Galery::all()
+            "result" => Galery::latest()->paginate(6)
         ]);
     }
 

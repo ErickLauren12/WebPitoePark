@@ -52,6 +52,9 @@
           <li class="nav-item">
             <a class="nav-link {{ ($title === "Cafe") ? 'active' : '' }}" href="/cafe">Cafe</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link {{ ($title === "Facility") ? 'active' : '' }}" href="/facility">Facility</a>
+          </li>
         </ul>
 
         <ul class="navbar-nav ms-auto">
@@ -65,6 +68,7 @@
               <a class="dropdown-item" href="/eventlist"><i class="bi bi-pencil-fill"></i> Post News</a>
               <a class="dropdown-item" href="/cafe/create"><i class="bi bi-pencil-fill"></i> Create Menu Cafe</a>
               <a class="dropdown-item" href="/category"><i class="bi bi-pencil-fill"></i> Create Menu Category</a>
+              <a class="dropdown-item" href="/facility/list"><i class="bi bi-pencil-fill"></i> Add Facility</a>
             @endif
             <li>
               <form action="/logout" method="post">

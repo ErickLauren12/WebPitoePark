@@ -19,24 +19,25 @@
     </form>
     @endif
     @endauth
-    <div class="row">
       <hr class="featurette-divider">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-3 mb-3">
         @foreach ($result as $item)
-        <div class="col-lg-4">
-            <img src="{{ asset('storage/' . $item['image']) }}" class="bd-placeholder-img mb-4" width="340" height="240">
-        
-        @auth
-        @if (auth()->user()->is_admin === 1)
-        <form action="/galery/delete/{{ $item['id'] }}" method="post" class="d-inline">
-            @method('delete')
-            @csrf
-            <button class="bg-danger" onclick="return confirm('Are you sure?')"><i class="bi bi-trash"></i></button>
-        </form>
-        @endif
-        @endauth
-      </div><!-- /.col-lg-4 -->
+        <div class="card">
+          <img src="{{ asset('storage/' . $item['image']) }}" class="bd-placeholder-img">
+          <div class="card-body">
+            @auth
+            @if (auth()->user()->is_admin === 1)
+            <form action="/galery/delete/{{ $item['id'] }}" method="post" class="d-inline">
+                @method('delete')
+                @csrf
+                <button class="btn btn-sm bg-danger" style="color: white" onclick="return confirm('Are you sure?')">Delete</button>
+            </form>
+            @endif
+            @endauth
+          </div>
+        </div>
         @endforeach
+      </div>
         <hr class="featurette-divider">
-      </div><!-- /.row -->
     </div>
 @endsection

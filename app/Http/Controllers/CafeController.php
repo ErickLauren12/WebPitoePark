@@ -19,32 +19,12 @@ class CafeController extends Controller
         return view('cafe.index',[
             'title'=>'Cafe',
             'search'=>"all",
-            "result" => Cafe::all(),
+            "result" => Cafe::latest()->filter(request(['search','category_id']))->paginate(6),
             "category" => CategoryFood::all()
         ]);
     }
 
-    public function filter(Request $request){
-        $credentials = $request->validate([
-            'category_id' => ['required']
-        ]);
-        if($credentials['category_id'] === "all"){
-            return view('cafe.index',[
-                'title'=>'Cafe',
-                'search'=>"all",
-                "result" => Cafe::all(),
-                "category" => CategoryFood::all()
-            ]);
-        }else{
-            return view('cafe.index',[
-                'title'=>'Cafe',
-                'search'=>$credentials['category_id'],
-                "result" => Cafe::where("category_id",$credentials['category_id'])->get(),
-                "category" => CategoryFood::all()
-            ]);
-        }
-    }
-
+    
     /**
      * Show the form for creating a new resource.
      *

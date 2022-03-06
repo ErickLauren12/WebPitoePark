@@ -10,6 +10,16 @@ class Cafe extends Model
         'name', 'image', 'price', 'account_id', 'category_id'
     ];
 
+    public function scopeFilter($query, array $filter){
+        $query->when($filter['search']??false, function($query, $search){
+            return $query->where('name', 'like', '%'.$search."%");
+        });
+
+        $query->when($filter['category_id']??false, function($query, $category){
+            return $query->where('category_id', 'like', '%'.$category."%");
+        });
+    }
+
     public function account(){
         return $this->belongsTo(Account::class);
     }

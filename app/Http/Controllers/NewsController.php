@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
     public function listData(){
         return view('event.index',[
             'title'=>'Event',
-            "events" => News::all()
+            "events" => News::latest()->paginate(8)
         ]);
     }
 
@@ -26,8 +27,7 @@ class NewsController extends Controller
         $credentials = $request->validate([
             'title' => ['required', 'max:255'],
             'image' => ['image','file'],
-            'body'=>['required'],
-            'category_id'=>['required']
+            'body'=>['required']
         ]);
 
         if($request->file('image')){
@@ -35,6 +35,7 @@ class NewsController extends Controller
         }
 
         $credentials['account_id'] = auth()->user()->id;
+        $credentials['excerpt'] = Str::limit(strip_tags($request['body']), 100, "...");
         $credentials['body'] = strip_tags($credentials['body']);
 
         News::create($credentials);
@@ -83,7 +84,8 @@ class NewsController extends Controller
 
         $credentials['account_id'] = auth()->user()->id;
         $credentials['body'] = strip_tags($credentials['body']);
-        
+        $credentials['excerpt'] = Str::limit(strip_tags($request['body']), 100, "...");
+
         if($request->file('image')){
             if($news['image']){
                 Storage::delete($news['image']);
