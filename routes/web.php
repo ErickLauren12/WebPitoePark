@@ -12,6 +12,9 @@ use App\Http\Controllers\Location;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ReservationFacilityController;
+use App\ReservationFacility;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,4 +70,13 @@ Route::post('/facility/create',[FacilityController::class, 'store'])->middleware
 Route::get('/facilty/detail/{cari}',[FacilityController::class, 'detail']);
 Route::get('/facilty/{facility}/edit',[FacilityController::class, 'edit'])->middleware('is_admin');
 Route::put('/facility/edit/{facility}',[FacilityController::class, 'update'])->middleware('is_admin');
-Route::delete('/facility/delete/{facility}',[FacilityController::class, 'destroy']);
+Route::delete('/facility/delete/{facility}',[FacilityController::class, 'destroy'])->middleware('is_admin');
+
+Route::get('/facility_reservation',[ReservationFacilityController::class, 'index']);
+Route::post('/facility_reservation/create',[ReservationFacilityController::class, 'store'])->middleware('is_admin');
+Route::delete('/facility_reservation/delete/{reservationFacility}',[ReservationFacilityController::class,'destroy'])->middleware('is_admin');
+
+
+Route::get('/reservation',[ReservationController::class, 'index']);
+Route::get('/reservation/create',[ReservationController::class, 'create']);
+Route::post('/reservation/create',[ReservationController::class, 'store']);

@@ -140,6 +140,6 @@ class FacilityController extends Controller
         }
 
         Facility::destroy($facility->id);
-        return redirect('/eventlist')->with('success','Facility has been deleted!');
+        return redirect('/facility')->with('success','Facility has been deleted!');
     }
 }
