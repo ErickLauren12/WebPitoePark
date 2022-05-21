@@ -12,6 +12,6 @@ class Event extends Model
     ];
 
     public function account(){
-        return $this->belongsTo(Account::class);
+        return $this->belongsTo("App\Account","account_id");
     }
 }

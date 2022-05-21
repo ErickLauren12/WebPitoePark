@@ -18,8 +18,8 @@ class CreateCafesTable extends Migration
             $table->string("name");
             $table->string('image');
             $table->string('price');
-            $table->foreignId('account_id');
-            $table->foreignId('category_id');
+            $table->unsignedBigInteger('account_id');
+            $table->unsignedBigInteger('category_id');
             $table->timestamps();
         });
     }

@@ -2,9 +2,7 @@
 
 @section('container')
 
-
 <main>
-
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -13,8 +11,7 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-
+      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/1.jpeg') }}" width="100%" height="530px" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
       <div class="container">
         <div class="carousel-caption text-start">
           <h1>Example headline.</h1>
@@ -24,7 +21,7 @@
       </div>
     </div>
     <div class="carousel-item">
-      <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/2.jpeg') }}" width="100%" height="530px" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
 
       <div class="container">
         <div class="carousel-caption">
@@ -35,7 +32,7 @@
       </div>
     </div>
     <div class="carousel-item">
-      <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/3.jpeg') }}" width="100%" height="530px" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
 
       <div class="container">
         <div class="carousel-caption text-end">
@@ -61,7 +58,7 @@
 ================================================== -->
 <!-- Wrap the rest of the page in another container to center all the content. -->
 
-<div class="container marketing">
+<div class="marketing pageBackgroundColor bg-light" style="margin-top: 10px">
 
   <!-- Three columns of text below the carousel -->
   <div class="row">
@@ -99,7 +96,7 @@
       <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
     </div>
     <div class="col-md-5">
-      <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/1.jpeg') }}" width="100%" height="90%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
 
     </div>
   </div>
@@ -112,7 +109,7 @@
       <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
     </div>
     <div class="col-md-5 order-md-1">
-      <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/2.jpeg') }}" width="100%" height="90%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
 
     </div>
   </div>
@@ -125,7 +122,7 @@
       <p class="lead">And yes, this is the last block of representative placeholder content. Again, not really intended to be actually read, simply here to give you a better view of what this would look like with some actual content. Your content.</p>
     </div>
     <div class="col-md-5">
-      <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/3.jpeg') }}" width="100%" height="90%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
 
     </div>
   </div>

@@ -14,9 +14,9 @@
     </div>
     @endif
     <main class="form-signin">
-      <form action="/login" method="post">
+      <form action={{ url("/login") }} method="post">
           @csrf
-        <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        <img class="mb-4" src={{ asset("../assets/brand/bootstrap-logo.svg") }} alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">Login</h1>
           
         <div class="form-floating">
@@ -38,7 +38,6 @@
         <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
       </form>
-      <small class="d-block text-center mt-3">Dont have?<a href="/register">Register</a></small>
     </main>
   </main>
 @endsection

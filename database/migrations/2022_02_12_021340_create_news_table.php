@@ -19,7 +19,7 @@ class CreateNewsTable extends Migration
             $table->text('body');
             $table->text('excerpt');
             $table->string('image')->nullable();
-            $table->foreignId('account_id');
+            $table->unsignedBigInteger('account_id');
             $table->timestamp('published_at');
             $table->timestamps();
         });

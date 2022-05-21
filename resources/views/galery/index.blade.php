@@ -2,8 +2,9 @@
 
 @section('container')
 <div class="container marketing">
+  <h1 class="display-4">Galery</h1>
   @auth
-    @if (auth()->user()->is_admin === 1)
+    @if (auth()->user()->is_admin >= 1)
     <form method="post" action="/galery/upload" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
@@ -26,7 +27,7 @@
           <img src="{{ asset('storage/' . $item['image']) }}" class="bd-placeholder-img">
           <div class="card-body">
             @auth
-            @if (auth()->user()->is_admin === 1)
+            @if (auth()->user()->is_admin >= 1)
             <form action="/galery/delete/{{ $item['id'] }}" method="post" class="d-inline">
                 @method('delete')
                 @csrf

@@ -99,7 +99,7 @@ class CafeController extends Controller
     {
         $credentials = $request->validate([
             'name' => ['required', 'max:255'],
-            'image' => ['image','file'],
+            'image' => ['required','image','file'],
             'price'=>['required'],
             'category_id'=>['required']
         ]);

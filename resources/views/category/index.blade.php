@@ -3,7 +3,7 @@
 @section('container')
 <div class="container marketing">
     <h1>Category Editor Menu</h1>
-    <form method="post" action="/category/create">
+    <form method="post" action={{ url("/category/create") }}>
       @csrf
       <div class="mb-3">
         <label for="title" class="form-label">Create Category Name</label>

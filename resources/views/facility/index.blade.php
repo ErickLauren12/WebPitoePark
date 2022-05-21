@@ -1,6 +1,8 @@
 @extends('navbar.main')
 @section('container')
 <div class="container marketing">
+  <h1 style="margin: 20px" class="display-4">Facility</h1>
+  <hr class="featurette-divider">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-3 mb-3">
         @foreach ($facility as $item)
         <div class="col">
@@ -15,5 +17,6 @@
           </div>
         @endforeach
     </div>
+    <hr class="featurette-divider">
 </div>
 @endsection

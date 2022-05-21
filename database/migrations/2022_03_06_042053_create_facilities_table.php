@@ -18,7 +18,7 @@ class CreateFacilitiesTable extends Migration
             $table->string('title');
             $table->text('body');
             $table->string('image')->nullable();
-            $table->foreignId('account_id');
+            $table->unsignedBigInteger('account_id');
             $table->timestamp('published_at');
             $table->timestamps();
         });

@@ -1,6 +1,7 @@
 @extends('navbar.main')
 
 @section('container')
+<h1 style="margin: 20px" class="display-4">See our menu</h1>
 <div class="album py-5 bg-light">
   @if (session()->has('success'))
   <div class="alert alert-success" role="alert">

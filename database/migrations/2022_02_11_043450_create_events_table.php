@@ -17,7 +17,7 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('body');
-            $table->foreignId('account_id');
+            $table->unsignedBigInteger('account_id');
             $table->timestamp('published_at');
             $table->timestamps();
         });

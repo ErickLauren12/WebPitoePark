@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGaleriesTable extends Migration
+class UpdateForeignkeyFacilities extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateGaleriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('galeries', function (Blueprint $table) {
-            $table->id();
-            $table->string('image');
-            $table->unsignedBigInteger('account_id');
-            $table->timestamps();
+        Schema::table('facilities', function (Blueprint $table) {
+            $table->foreign('account_id')->references('id')->on('accounts');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateGaleriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('galeries');
+        Schema::table('facilities', function (Blueprint $table) {
+            $table->dropForeign(['account_id']);
+        });
     }
 }
