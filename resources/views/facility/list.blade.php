@@ -1,8 +1,10 @@
 @extends('navbar.main')
 
 @section('container')
+
 <div class="container marketing">
-  <a href="/facility/create" class="btn btn-primary mb-3 mt-3">Add new facility</a>
+  <h1>Dashboard Fasilitas</h1>
+  <a href="/facility/create" class="btn btn-primary mb-3 mt-3">Buat Fasilitas Baru</a>
 <div class="table-responsive">
   @if (session()->has('success'))
   <div class="alert alert-success" role="alert">
@@ -13,9 +15,9 @@
       <thead>
         <tr>
           <th scope="col">No</th>
-          <th scope="col">Title</th>
-          <th scope="col">Date</th>
-          <th scope="col">Action</th>
+          <th scope="col">Nama</th>
+          <th scope="col">Tanggal</th>
+          <th scope="col">Aksi</th>
         </tr>
       </thead>
       <tbody>

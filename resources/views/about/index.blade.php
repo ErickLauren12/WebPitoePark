@@ -4,20 +4,16 @@
  <!-- START THE FEATURETTES -->
 <div class="container marketing">
 
-  <h1 class="display-4">About Us</h1>
+  <h1 class="display-4">Tentang Kami</h1>
   <hr class="featurette-divider">
-  <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
-
-
- <hr class="featurette-divider">
 
  <div class="row featurette">
    <div class="col-md-7">
-     <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
-     <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
+     <h2 class="featurette-heading">Desa Selotapak</h2>
+     <p class="lead">Desa Selotapak merupakan salah satu desa yang berlokasi di Kecamatan Trawas, Kabupaten Mojokerto. Secara geografis, Desa Selotapak terletak diantara pegunungan Arjuno Welirang dan Penanggungan. Pemandangan alam yang indah, hamparan sawah terasering yang luas, dan penduduk yang ramah menjadi ciri khas Desa Selotapak.</p>
    </div>
    <div class="col-md-5">
-     <img class="bd-placeholder-img" src="{{ asset('storage/website-image/1.jpeg') }}" width="500px" height="300px" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+     <img class="bd-placeholder-img" src="{{ asset('storage/website-image/9.jpg') }}" width="500px" height="300px" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
    </div>
  </div>
 
@@ -25,25 +21,11 @@
 
  <div class="row featurette">
    <div class="col-md-7 order-md-2">
-     <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
-     <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
+     <h2 class="featurette-heading">Kendhi Pitoe Park</h2>
+     <p class="lead">Kendhi Pitoe Park merupakan tempat wisata terbaru di desa Selotapak Kecamatan Trawas. Kendhi Pitoe Park sendiri menyediakan beberapa fasilitas seperti cafe, kolam renang, dan tempat foto. Kendhi Pitoe Park memiliki pemandangan yang indah dikarenakan lokasinya yang terasering dan berada di antara sawah.</p>
    </div>
    <div class="col-md-5 order-md-1">
-     <img class="bd-placeholder-img" src="{{ asset('storage/website-image/2.jpeg') }}" width="500px" height="300px" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-
-   </div>
- </div>
-
- <hr class="featurette-divider">
-
- <div class="row featurette">
-   <div class="col-md-7">
-     <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-     <p class="lead">And yes, this is the last block of representative placeholder content. Again, not really intended to be actually read, simply here to give you a better view of what this would look like with some actual content. Your content.</p>
-   </div>
-   <div class="col-md-5">
-     <img class="bd-placeholder-img" src="{{ asset('storage/website-image/3.jpeg') }}" width="500px" height="300px" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-
+     <img class="bd-placeholder-img" src="{{ asset('storage/website-image/7.jpg') }}" width="500px" height="300px" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
    </div>
  </div>
 

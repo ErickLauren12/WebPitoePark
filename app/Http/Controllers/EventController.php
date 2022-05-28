@@ -29,7 +29,7 @@ class EventController extends Controller
         //return dd($credentials);
         
         Event::create($credentials);
-        return redirect('/eventlist')->with('success','New event has been added!');
+        return redirect('/eventlist')->with('success','Event Baru Berhasil di Tambahkan!');
     }
 
     public function show($id)
@@ -49,6 +49,6 @@ class EventController extends Controller
     public function destroy(Event $event)
     {
         Event::destroy($event->id);
-        return redirect('/eventlist')->with('success','Event has been deleted!');
+        return redirect('/eventlist')->with('success','Event Berhasil di Hapus!');
     }
 }

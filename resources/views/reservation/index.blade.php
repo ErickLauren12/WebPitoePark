@@ -8,6 +8,8 @@
         {{ session('success') }}
       </div>
       @endif
+      <h1>Membuat Reservasi Baru</h1>
+
       <form action="/reservation" method="get">
         @csrf
         <div class="input-group mb-3"> 
@@ -32,9 +34,14 @@
             </div>  
         </div>
     </form>
-
-      <a href="/reservation/create"><button class="btn btn-primary mb-3">Create New Reservation</button></a>
-      <a href="/facility_reservation"><button class="btn btn-primary mb-3">Create New Facility</button></a>
+      <a href="/reservation/create"><button class="btn btn-primary mb-3">Buat Reservasi baru</button></a>
+      <div style="border: 1px solid black; padding:10px">
+        <p>Tips: Jika fasilitas kosong maka buat fasilitas dulu dengan menekan tombol "Buat Fasilitas Baru"</p>
+        <a href="/facility_reservation"><button class="btn btn-primary mb-3">Buat Fasilitas Baru</button></a>
+      </div>
+      
+      <br>
+      <h1>Daftar Reservasi</h1>
       <div class="table-responsive">
           <table class="table table-striped table-sm">
             <thead>

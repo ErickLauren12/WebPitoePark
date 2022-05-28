@@ -1,7 +1,7 @@
 @extends('navbar.main')
 
 @section('container')
-<h1 class="mt-3 mb-3">Edit Event</h1>
+<h1 class="mt-3 mb-3">Mengubah Event Baru</h1>
 <hr class="featurette-divider">
 <div class="container marketing col-lg-5">
 
@@ -9,7 +9,7 @@
     @method('put')
     @csrf
     <div class="mb-3">
-      <label for="title" class="form-label">Title</label>
+      <label for="title" class="form-label">Judul</label>
       @error('title')
             <p class="text-danger">{{ $message }}</p>
         @enderror
@@ -17,7 +17,7 @@
     </div>
 
     <div class="mb-3">
-      <label for="image" class="form-label">Upload Image</label>
+      <label for="image" class="form-label">Upload Gambar/ Video</label>
       @if ($events->image)
         <img src="{{ asset('storage/' . $events->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block" alt="">
       @else
@@ -30,7 +30,7 @@
     </div>
 
     <div class="mb-3">
-        <label for="title" class="form-label">Body</label>
+      <label for="title" class="form-label">Isi Event</label>
         @error('body')
             <p class="text-danger">{{ $message }}</p>
         @enderror
@@ -38,7 +38,7 @@
         <trix-editor input="body"></trix-editor>
     </div>
    
-    <button type="submit" class="btn btn-primary">Update Event</button>
+    <button type="submit" class="btn btn-primary">Ubah Event</button>
   </form>
 </div>
 @endsection

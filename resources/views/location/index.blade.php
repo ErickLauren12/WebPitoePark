@@ -2,7 +2,7 @@
 @section('container')
 
 <div class="container marketing">
-	<h1 style="margin: 20px" class="display-4">Find Us</h1>
+	<h1 style="margin: 20px" class="display-4">Temukan Kami</h1>
 <div class="container">
 	<div class="row align-items-md-stretch">
 		<div class="col-md-6">
@@ -10,15 +10,10 @@
 		</div>
 		<div class="col-md-6">
 		  <div class="h-100 p-5 bg-light border rounded-3">
-			<h2>Snail mail</h2>
+			<h2>Kendhi Pitoe Park</h2>
 			<address>
-				<strong>Hythe Window Cleaning</strong><br>
-				15 Springfield Way<br>
-				Hythe<br>
-				Kent<br>
-				United Kingdon<br>
-				CT21 5SH<br>
-				<abbr title="Phone">P:</abbr> 01234 567 890
+				<strong>Kec. Trawas, Kabupaten Mojokerto, Jawa Timur</strong><br>
+				<abbr title="Phone">Telp:</abbr> 01234 567 890
 			</address>
 		  </div>
 		</div>

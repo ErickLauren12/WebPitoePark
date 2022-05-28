@@ -48,6 +48,13 @@ class GaleryController extends Controller
         }
 
         $credentials['account_id'] = auth()->user()->id;
+        $fileFormat = $request->file('image')->getClientOriginalExtension();
+
+        if($fileFormat == "mp4" || $fileFormat == "flv" || $fileFormat == "m3u8" || $fileFormat == "ts" || $fileFormat == "3gp" || $fileFormat == "mov" || $fileFormat == "avi" || $fileFormat == "wmv"){
+            $credentials['format'] = "Video";
+        }else{
+            $credentials['format'] = "Gambar";
+        }
         
         Galery::create($credentials);
         return redirect('/galery');
@@ -102,4 +109,5 @@ class GaleryController extends Controller
         Galery::destroy($galery->id);
         return redirect('/galery');
     }
+    
 }

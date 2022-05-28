@@ -1,14 +1,14 @@
 @extends('navbar.main')
 
 @section('container')
-<h1 class="mt-3 mb-3">Create New Event</h1>
+<h1 class="mt-3 mb-3">Membuat Event Baru</h1>
 <hr class="featurette-divider">
 <div class="container marketing col-lg-5">
 
 <form method="post" action="/event/create" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
-      <label for="title" class="form-label">Title</label>
+      <label for="title" class="form-label">Judul</label>
       @error('title')
             <p class="text-danger">{{ $message }}</p>
         @enderror
@@ -16,7 +16,7 @@
     </div>
 
     <div class="mb-3">
-      <label for="image" class="form-label">Upload Image</label>
+      <label for="image" class="form-label">Upload Gambar/ Video</label>
 
       <img class="img-preview img-fluid mb-3 col-sm-5" alt="">
       <input class="form-control" @error('image') is-invalid @enderror type="file" id="image" name="image" onchange="previewImage()">
@@ -26,7 +26,7 @@
     </div>
 
     <div class="mb-3">
-        <label for="title" class="form-label">Body</label>
+        <label for="title" class="form-label">Isi Event</label>
         @error('body')
             <p class="text-danger">{{ $message }}</p>
         @enderror
@@ -34,7 +34,7 @@
         <trix-editor input="body"></trix-editor>
     </div>
    
-    <button type="submit" class="btn btn-primary">Create Event</button>
+    <button type="submit" class="btn btn-primary">Buat Event</button>
   </form>
 </div>
 @endsection

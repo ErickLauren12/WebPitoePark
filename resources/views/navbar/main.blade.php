@@ -57,22 +57,22 @@
             <a class= "nav-link {{ ($title === "Home") ? 'active' : '' }}" href={{ url('/') }}>Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ ($title === "Galery") ? 'active' : '' }}" href={{ url('/galery') }}>Galery</a>
+            <a class="nav-link {{ ($title === "Galery") ? 'active' : '' }}" href={{ url('/galery') }}>Galeri</a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{ ($title === "Event") ? 'active' : '' }}" href={{ url("/event") }}>Events</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ ($title === "Location") ? 'active' : '' }}" href={{ url("/location") }}>Location</a>
+            <a class="nav-link {{ ($title === "Location") ? 'active' : '' }}" href={{ url("/location") }}>Lokasi</a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{ ($title === "Cafe") ? 'active' : '' }}" href={{ url("/cafe") }}>Cafe</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ ($title === "Facility") ? 'active' : '' }}" href={{ url("/facility") }}>Facility</a>
+            <a class="nav-link {{ ($title === "Facility") ? 'active' : '' }}" href={{ url("/facility") }}>Fasilitas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ ($title === "About") ? 'active' : '' }}" href={{ url("/about") }}>About Us</a>
+            <a class="nav-link {{ ($title === "About") ? 'active' : '' }}" href={{ url("/about") }}>Tentang Kami</a>
           </li>
           @auth
           @endauth
@@ -86,14 +86,14 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             @if (auth()->user()->is_admin >= 1)
-              <a class="dropdown-item" href={{ url("/eventlist") }}><i class="bi bi-pencil-fill"></i> Post News</a>
-              <a class="dropdown-item" href={{ url("/cafe/create") }}><i class="bi bi-pencil-fill"></i> Create Menu Cafe</a>
-              <a class="dropdown-item" href={{ url("/category") }}><i class="bi bi-pencil-fill"></i> Create Menu Category</a>
-              <a class="dropdown-item" href={{ url("/reservation") }}><i class="bi bi-pencil-fill"></i> Create Reservation</a>
-              <a class="dropdown-item" href={{ url("/facility/list") }}><i class="bi bi-pencil-fill"></i> Add Facility</a>   
+              <a class="dropdown-item" href={{ url("/eventlist") }}><i class="bi bi-pencil-fill"></i> Dashboard Event</a>
+              <a class="dropdown-item" href={{ url("/cafe/create") }}><i class="bi bi-pencil-fill"></i> Buat Menu Cafe Baru</a>
+              <a class="dropdown-item" href={{ url("/category") }}><i class="bi bi-pencil-fill"></i> Kategori Makanan</a>
+              <a class="dropdown-item" href={{ url("/reservation") }}><i class="bi bi-pencil-fill"></i> Dashboard Reservasi</a>
+              <a class="dropdown-item" href={{ url("/facility/list") }}><i class="bi bi-pencil-fill"></i> Dashboard Fasilitas</a>   
             @endif
             @if (auth()->user()->is_admin === 2)
-              <a class="dropdown-item" href={{ url("/employee") }}><i class="bi bi-pencil-fill"></i>Account Dashboard</a>
+              <a class="dropdown-item" href={{ url("/employee") }}><i class="bi bi-pencil-fill"></i> Dashboard Akun</a>
               @endif
             <li>
               <form action={{ url('/logout') }} method="post">

@@ -1,7 +1,7 @@
 @extends('navbar.main')
 
 @section('container')
-<h1 style="margin: 20px" class="display-4">See our menu</h1>
+<h1 style="margin: 20px" class="display-4">Menu di Cafe Kendhi Pitoe Park</h1>
 <div class="album py-5 bg-light">
   @if (session()->has('success'))
   <div class="alert alert-success" role="alert">
@@ -12,16 +12,16 @@
     <div class="container">
       <form action="/cafe">
         <div class="input-group mb-3"> 
-            <input type="text" class="form-control" placeholder="Search..." name="search" value="{{ request('search') }}">
+            <input type="text" class="form-control" placeholder="Cari..." name="search" value="{{ request('search') }}">
             <div class="input-group-append">
-              <button class="btn btn-danger" type="submit">Search</button>
+              <button class="btn btn-danger" type="submit">Cari</button>
             </div>  
         </div>
     </form>
       <form method="get" action="/cafe">
         @csrf
         <div class="mb-3">
-          <label for="categoryFood" class="form-label">Food Category: </label>
+          <label for="categoryFood" class="form-label">Kategori Makanan: </label>
           <select class="dropdown-toggle btn btn-secondary" name="category_id">
             <option value="">No Filter</option>
             @foreach ($category as $item)
@@ -32,7 +32,7 @@
               @endif 
             @endforeach
           </select>
-          <button type="submit" class="btn btn-primary">Search</button>
+          <button type="submit" class="btn btn-primary">Cari</button>
         </div>
       </form>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">

@@ -3,7 +3,7 @@
 @section('container')
 <div class="container marketing">
     <p></p>
-    <a href="/event/create" class="btn btn-primary mb-3">Create new event</a>
+    <a href="/event/create" class="btn btn-primary mb-3">Buat Event Baru</a>
 <div class="table-responsive">
   @if (session()->has('success'))
   <div class="alert alert-success" role="alert">
@@ -14,9 +14,9 @@
       <thead>
         <tr>
           <th scope="col">No</th>
-          <th scope="col">Title</th>
-          <th scope="col">Date</th>
-          <th scope="col">Action</th>
+          <th scope="col">Judul</th>
+          <th scope="col">Tanggal</th>
+          <th scope="col">Aksi</th>
         </tr>
       </thead>
       <tbody>

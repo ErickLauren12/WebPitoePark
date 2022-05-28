@@ -2,20 +2,20 @@
 
 @section('container')
 <div class="container marketing">
-    <h1>Category Editor Menu</h1>
+    <h1>Membuat Kategori Makanan Baru</h1>
     <form method="post" action={{ url("/category/create") }}>
       @csrf
       <div class="mb-3">
-        <label for="title" class="form-label">Create Category Name</label>
+        <label for="title" class="form-label">Masukan Nama Kategori Makanan</label>
       @error('title')
             <p class="text-danger">{{ $message }}</p>
         @enderror
       <input type="text" class="form-control" id="name" name="name" autofocus value="{{ old('name') }}">
       </div>
-    <button type="submit" class="btn btn-primary">Create New Category</button>
+    <button type="submit" class="btn btn-primary">Buat Kategori</button>
     </form>
     <br>
-
+    <h1>Daftar Kategori Makanan</h1>
 <div class="table-responsive">
   @if (session()->has('success'))
   <div class="alert alert-success" role="alert">
@@ -26,9 +26,9 @@
       <thead>
         <tr>
           <th scope="col">No</th>
-          <th scope="col">Title</th>
-          <th scope="col">Date</th>
-          <th scope="col">Action</th>
+          <th scope="col">Nama</th>
+          <th scope="col">Tanggal</th>
+          <th scope="col">Aksi</th>
         </tr>
       </thead>
       <tbody>

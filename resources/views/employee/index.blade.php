@@ -3,6 +3,7 @@
 @section('container')
 <div class="album py-5 bg-light">
     <div class="container">
+      <h1>Membuat Akun Pegawai Baru</h1>
       @if (session()->has('success'))
       <div class="alert alert-success" role="alert">
         {{ session('success') }}
@@ -12,14 +13,15 @@
         @csrf
         <div class="input-group mb-3"> 
             <label class="form-label">Username:</label> <input type="text" class="form-control mr-3 ml-3" placeholder="Username" name="username" value="{{ request('username') }}">
-            <label class="form-label">Phone Number:</label> <input type="text" class="form-control mr-3 ml-3" placeholder="Phone" name="phone" value="{{ request('phone') }}">
             <label class="form-label">Password:</label> <input type="password" class="form-control mr-3 ml-3" placeholder="Password" name="password" value="{{ request('password') }}">
-            
+            <label class="form-label">No Telp:</label> <input type="text" class="form-control mr-3 ml-3" placeholder="Phone" name="phone" value="{{ request('phone') }}">
             <div class="input-group-append">
               <button class="btn btn-primary" type="submit">Register</button>
             </div>  
         </div>
     </form>
+    <br>
+    <h1>Daftar Akun Pegawai</h1>
       <div class="table-responsive">
           <table class="table table-striped table-sm">
             <thead>

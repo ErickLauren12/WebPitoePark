@@ -1,14 +1,14 @@
 @extends('navbar.main')
 
 @section('container')
-<h1 class="mt-3 mb-3">Create New Menu</h1>
+<h1 class="mt-3 mb-3">Membuat Menu Baru</h1>
 <hr class="featurette-divider">
 <div class="container marketing col-lg-5">
 
 <form method="post" action="/cafe/create" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
-      <label for="name" class="form-label">Name</label>
+      <label for="name" class="form-label">Nama</label>
       @error('name')
             <p class="text-danger">{{ $message }}</p>
         @enderror
@@ -16,7 +16,7 @@
     </div>
 
     <div class="mb-3">
-      <label for="image" class="form-label">Upload Image</label>
+      <label for="image" class="form-label">Upload Gambar</label>
 
       <img class="img-preview img-fluid mb-3 col-sm-5" alt="">
       @error('image')
@@ -26,7 +26,7 @@
     </div>
 
     <div class="mb-3">
-      <label for="title" class="form-label">Price</label>
+      <label for="title" class="form-label">Harga</label>
       @error('price')
             <p class="text-danger">{{ $message }}</p>
         @enderror
@@ -34,7 +34,7 @@
     </div>
 
     <div class="mb-3">
-      <label for="categoryFood" class="form-label">Food Category</label>
+      <label for="categoryFood" class="form-label">Kategori Makanan <span style="font-weight: bold">(Jika Kosong Buat Kategori Makanan Terlebih Dahulu)</span> </label>
       <select class="custom-select" name="category_id">
         @foreach ($category as $item)
           <option value="{{ $item->id }}">{{ $item->name }}</option>

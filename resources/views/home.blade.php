@@ -11,34 +11,33 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/1.jpeg') }}" width="100%" height="530px" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/1.jpg') }}" width="100%" height="530px" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
       <div class="container">
         <div class="carousel-caption text-start">
-          <h1>Example headline.</h1>
-          <p>Some representative placeholder content for the first slide of the carousel.</p>
-          <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+          <!--<h1>Selamat datang di Kendhi Pitoe Park.</h1>
+          <p>Some representative placeholder content for the first slide of the carousel.</p>-->
         </div>
       </div>
     </div>
     <div class="carousel-item">
-      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/2.jpeg') }}" width="100%" height="530px" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/2.jpg') }}" width="100%" height="530px" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
 
       <div class="container">
         <div class="carousel-caption">
-          <h1>Another example headline.</h1>
+          <!--<h1>Nikmati Pemandangan Alam yang Indah.</h1>
           <p>Some representative placeholder content for the second slide of the carousel.</p>
-          <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+          <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>-->
         </div>
       </div>
     </div>
     <div class="carousel-item">
-      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/3.jpeg') }}" width="100%" height="530px" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/3.jpg') }}" width="100%" height="530px" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
 
       <div class="container">
         <div class="carousel-caption text-end">
-          <h1>One more for good measure.</h1>
+          <!--<h1>Nikmati Fasilitas yang ada di Kendhi Pitoe Park.</h1>
           <p>Some representative placeholder content for the third slide of this carousel.</p>
-          <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+          <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>-->
         </div>
       </div>
     </div>
@@ -61,27 +60,27 @@
 <div class="marketing pageBackgroundColor bg-light" style="margin-top: 10px">
 
   <!-- Three columns of text below the carousel -->
+  <hr class="featurette-divider">
+  <br>
   <div class="row">
     <div class="col-lg-4">
-      <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-
-      <h2>Heading</h2>
-      <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
-      <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+      <img src="{{ asset('storage/website-image/4.jpg') }}" class="bd-placeholder-img rounded-circle" width="200" height="200">
+      <h2>Galery</h2>
+      <p>Lihat momen-momen terbaik di Kendhi Pitoe Park.</p>
+      <p><a class="btn btn-secondary" href="#">Klik Disini &raquo;</a></p>
     </div><!-- /.col-lg-4 -->
     <div class="col-lg-4">
-      <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+      <img src="{{ asset('storage/website-image/9.jpg') }}" class="bd-placeholder-img rounded-circle" width="200" height="200">
 
-      <h2>Heading</h2>
-      <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
-      <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+      <h2>Events</h2>
+      <p>Lihat beberapa info terbaru di Kendhi Pitoe Park.</p>
+      <p><a class="btn btn-secondary" href="#">Klik Disini &raquo;</a></p>
     </div><!-- /.col-lg-4 -->
     <div class="col-lg-4">
-      <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-
-      <h2>Heading</h2>
-      <p>And lastly this, the third column of representative placeholder content.</p>
-      <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+      <img src="{{ asset('storage/website-image/8.jpg') }}" class="bd-placeholder-img rounded-circle" width="200" height="200">
+      <h2>Facility</h2>
+      <p>Lihat fasilitas yang ada di Kendhi Pitoe Park.</p>
+      <p><a class="btn btn-secondary" href="#">Klik Disini &raquo;</a></p>
     </div><!-- /.col-lg-4 -->
   </div><!-- /.row -->
 
@@ -92,12 +91,11 @@
 
   <div class="row featurette">
     <div class="col-md-7">
-      <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
-      <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
+      <h2 class="featurette-heading">Selamat Datang di Kendhi Pitoe Park.<span class="text-muted"></span></h2>
+      <p class="lead">Kendhi Pitoe Park merupakan tempat wisata terbaru di desa Selotapak.kec.Trawas. Terdapat cafe, spot selfie, kolam renang anak, dan masih banyak lagi. Tempatnya sangat cocok buat liburan keluarga.</p>
     </div>
     <div class="col-md-5">
-      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/1.jpeg') }}" width="100%" height="90%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-
+      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/1.jpg') }}" width="100%" height="90%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
     </div>
   </div>
 
@@ -105,11 +103,11 @@
 
   <div class="row featurette">
     <div class="col-md-7 order-md-2">
-      <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
-      <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
+      <h2 class="featurette-heading">Pemandagan Alam yang Indah. <span class="text-muted"></span></h2>
+      <p class="lead">Kendhi Pitoe Park menyediakan pemandangan alam yang sangat indah. Seperti hamparan sawah yang luas, pegunugan, dan bunga bunga yang menghiasi Kendhi Pitoe Park.</p>
     </div>
     <div class="col-md-5 order-md-1">
-      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/2.jpeg') }}" width="100%" height="90%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/2.jpg') }}" width="100%" height="90%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
 
     </div>
   </div>
@@ -118,11 +116,11 @@
 
   <div class="row featurette">
     <div class="col-md-7">
-      <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-      <p class="lead">And yes, this is the last block of representative placeholder content. Again, not really intended to be actually read, simply here to give you a better view of what this would look like with some actual content. Your content.</p>
+      <h2 class="featurette-heading">Banyak Fasilitas yang Menarik. <span class="text-muted"></span></h2>
+      <p class="lead">Nikmati berbagai macam fasilitas yang ada di Kendhi Pitoe Park. Mulai dari cafe, spot foto, kolam renang, dan masih banyak lagi. Sehingga Kendhi Pitoe Park menjadi destinasi pariwisata yang cocok untuk akhir pekan.</p>
     </div>
     <div class="col-md-5">
-      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/3.jpeg') }}" width="100%" height="90%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/3.jpg') }}" width="100%" height="90%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
 
     </div>
   </div>
