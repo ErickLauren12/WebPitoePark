@@ -1,14 +1,15 @@
 @extends('navbar.main')
 
 @section('container')
-<h1 class="mt-3 mb-3">Membuat Menu Baru</h1>
-<hr class="featurette-divider">
-<div class="container marketing col-lg-5">
+
+<div style="margin-top: 130px" class="container marketing col-lg-5">
+  <h1 class="mt-3 mb-3">Membuat Menu Baru</h1>
+  <hr class="featurette-divider">
 
 <form method="post" action="/cafe/create" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
-      <label for="name" class="form-label">Nama</label>
+      <label for="name" class="form-label">Nama:</label>
       @error('name')
             <p class="text-danger">{{ $message }}</p>
         @enderror

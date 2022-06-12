@@ -1,6 +1,7 @@
 @extends('navbar.main')
 
 @section('container')
+<div style="margin-top: 130px" class="container marketing">
 <h1 style="margin: 20px" class="display-4">Menu di Cafe Kendhi Pitoe Park</h1>
 <div class="album py-5 bg-light">
   @if (session()->has('success'))
@@ -67,5 +68,6 @@
         </div><br>
         {{ $result->links() }}
     </div>
+</div>
 </div>
 @endsection

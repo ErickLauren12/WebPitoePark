@@ -1,7 +1,7 @@
 @extends('navbar.main')
 
 @section('container')
-<div class="container marketing">
+<div style="margin-top: 130px" class="container marketing">
     <h1>Facility Editor Menu</h1>
     <form method="post" action="/facility_reservation/create">
       @csrf

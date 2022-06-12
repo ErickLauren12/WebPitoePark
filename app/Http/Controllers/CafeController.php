@@ -24,6 +24,22 @@ class CafeController extends Controller
         ]);
     }
 
+    public function indexDashBoard()
+    {
+        return view('cafe.cafedashboard',[
+            'title'=>'Cafe',
+            "result" => Cafe::latest()->paginate(6),
+        ]);
+    }
+
+    public function indexDashBoardAdmin()
+    {
+        return view('cafe.cafedashboardadmin',[
+            'title'=>'Cafe',
+            "result" => Cafe::latest()->paginate(6),
+        ]);
+    }
+
     
     /**
      * Show the form for creating a new resource.
@@ -59,7 +75,7 @@ class CafeController extends Controller
 
         $credentials['account_id'] = auth()->user()->id;
         Cafe::create($credentials);
-        return redirect('/cafe')->with('success','New Menu Has Been Added');
+        return redirect('/cafe/dashboard')->with('success','New Menu Has Been Added');
     }
 
     /**
@@ -114,7 +130,7 @@ class CafeController extends Controller
         }
 
         Cafe::where('id', $cafe['id'])->update($credentials);
-        return redirect('/cafe')->with('success','The event has been updated!');
+        return redirect('/cafe/dashboard')->with('success','The event has been updated!');
     }
 
     /**
@@ -129,6 +145,35 @@ class CafeController extends Controller
             Storage::delete($cafe['image']);
         }
         Cafe::destroy($cafe->id);
-        return redirect('/cafe')->with('success','Menu has been deleted!');
+        return redirect('/cafe/dashboard')->with('success','Menu berhasil di hapus');
+    }
+
+    public function confirmation(Cafe $cafe){
+        $cafe->status = "Accepted";
+        $cafe->message = "";
+        $cafe->save();
+        return redirect()->back()->with('success', 'Verifikasi Menu Berhasil. Menut telah ditampilkan di halaman Cafe');
+    }
+
+    public function reject(Request $request, Cafe $cafe){
+        $cafe->status = "Rejected";
+        $cafe->message = $request['message'];
+        $cafe->save();
+        return redirect()->back()->with('success', 'Menu Berhasil Ditolak');
+    }
+
+    public function search(Request $request){
+        if($request['type'] == "superadmin"){
+            return view('cafe.cafedashboardadmin',[
+                'title'=>'Cafe',
+                "result" => Cafe::latest()->where("name","like","%".$request['search']."%")->paginate(8)
+            ]);
+        }else{
+            return view('cafe.cafedashboard',[
+                'title'=>'Cafe',
+                'result' => Cafe::where("name","like","%".$request['search']."%")->paginate(8)
+            ]);
+        }
+
     }
 }

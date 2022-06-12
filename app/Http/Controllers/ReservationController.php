@@ -46,6 +46,7 @@ class ReservationController extends Controller
     {
         $credentials = $request->validate([
             'name' => ['required', 'max:255'],
+            'description' => ['max:1000'],
             'start_date'=>['required'],
             'end_date'=>['required'],
             'facility_id'=>['required']

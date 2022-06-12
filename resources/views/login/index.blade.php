@@ -16,7 +16,7 @@
     <main class="form-signin">
       <form action={{ url("/login") }} method="post">
           @csrf
-        <img class="mb-4" src={{ asset("../assets/brand/bootstrap-logo.svg") }} alt="" width="72" height="57">
+        <img class="mb-4" src={{ asset('storage/website-image/pitoe.png') }} alt="" width="220" height="200">
         <h1 class="h3 mb-3 fw-normal">Login</h1>
           
         <div class="form-floating">

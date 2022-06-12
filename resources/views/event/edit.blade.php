@@ -1,10 +1,10 @@
 @extends('navbar.main')
 
 @section('container')
-<h1 class="mt-3 mb-3">Mengubah Event Baru</h1>
-<hr class="featurette-divider">
-<div class="container marketing col-lg-5">
 
+<div style="margin-top: 130px" class="container marketing col-lg-5">
+  <h1 class="mt-3 mb-3">Mengubah Event Baru</h1>
+  <hr class="featurette-divider">
 <form method="post" action="/event/edit/{{ $events->id }}" enctype="multipart/form-data">
     @method('put')
     @csrf

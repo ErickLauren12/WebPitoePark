@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reservation extends Model
 {
     protected $fillable = [
-        'name', 'start_date', 'end_date','facility_id'
+        'name', 'description','start_date', 'end_date','facility_id'
     ];
 
     public function scopeFilter($query, array $filter){

@@ -1,5 +1,4 @@
 @extends('navbar.main')
-
 @section('container')
 
 <main>
@@ -11,7 +10,7 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/1.jpg') }}" width="100%" height="530px" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <img class="d-block w-100" src="{{ asset('storage/website-image/1.png') }}" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
       <div class="container">
         <div class="carousel-caption text-start">
           <!--<h1>Selamat datang di Kendhi Pitoe Park.</h1>
@@ -20,7 +19,7 @@
       </div>
     </div>
     <div class="carousel-item">
-      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/2.jpg') }}" width="100%" height="530px" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <img class="d-block w-100" src="{{ asset('storage/website-image/2.png') }}" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
 
       <div class="container">
         <div class="carousel-caption">
@@ -31,7 +30,7 @@
       </div>
     </div>
     <div class="carousel-item">
-      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/3.jpg') }}" width="100%" height="530px" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <img class="d-block w-100" src="{{ asset('storage/website-image/3.png') }}" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
 
       <div class="container">
         <div class="carousel-caption text-end">
@@ -95,7 +94,7 @@
       <p class="lead">Kendhi Pitoe Park merupakan tempat wisata terbaru di desa Selotapak.kec.Trawas. Terdapat cafe, spot selfie, kolam renang anak, dan masih banyak lagi. Tempatnya sangat cocok buat liburan keluarga.</p>
     </div>
     <div class="col-md-5">
-      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/1.jpg') }}" width="100%" height="90%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/10.jpg') }}" width="100%" height="90%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
     </div>
   </div>
 
@@ -107,7 +106,7 @@
       <p class="lead">Kendhi Pitoe Park menyediakan pemandangan alam yang sangat indah. Seperti hamparan sawah yang luas, pegunugan, dan bunga bunga yang menghiasi Kendhi Pitoe Park.</p>
     </div>
     <div class="col-md-5 order-md-1">
-      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/2.jpg') }}" width="100%" height="90%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/11.jpg') }}" width="100%" height="90%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
 
     </div>
   </div>
@@ -120,8 +119,8 @@
       <p class="lead">Nikmati berbagai macam fasilitas yang ada di Kendhi Pitoe Park. Mulai dari cafe, spot foto, kolam renang, dan masih banyak lagi. Sehingga Kendhi Pitoe Park menjadi destinasi pariwisata yang cocok untuk akhir pekan.</p>
     </div>
     <div class="col-md-5">
-      <img class="bd-placeholder-img" src="{{ asset('storage/website-image/3.jpg') }}" width="100%" height="90%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-
+      <!--<img class="bd-placeholder-img" src="{{ asset('storage/website-image/3.jpg') }}" width="100%" height="90%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">-->
+      <iframe class="bd-placeholder-img" width="100%" height="400px" src="https://www.youtube.com/embed/g1nAAN8Fl6E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
   </div>
 

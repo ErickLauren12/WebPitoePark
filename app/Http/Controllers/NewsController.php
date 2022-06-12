@@ -12,7 +12,14 @@ class NewsController extends Controller
     public function listData(){
         return view('event.index',[
             'title'=>'Event',
-            "events" => News::latest()->paginate(8)
+            "events" => News::latest()->where('status','=','Accepted')->paginate(8)
+        ]);
+    }
+
+    public function listDataAdmin(){
+        return view('event.dashboardadmin',[
+            'title'=>'Event',
+            "post" => News::latest()->paginate(8)
         ]);
     }
 
@@ -39,7 +46,7 @@ class NewsController extends Controller
         $credentials['body'] = strip_tags($credentials['body']);
 
         News::create($credentials);
-        return redirect('/eventlist')->with('success','New event has been added!');
+        return redirect('/eventlist')->with('success','Event Baru Berhasil di Tambahkan!');
     }
 
     public function show($id)
@@ -54,18 +61,23 @@ class NewsController extends Controller
     {
         return view('event.postlist',[
             'title'=>'Events',
-            'post' => News::where('account_id',auth()->user()->id)->get()
+            'post' => News::where('account_id',auth()->user()->id)->paginate(8)
         ]);
     }
 
     public function destroy(News $news)
     {
-        if($news['image']){
-            Storage::delete($news['image']);
+        try {
+            if($news['image']){
+                Storage::delete($news['image']);
+            }
+    
+            News::destroy($news->id);
+            return redirect('/eventlist')->with('success','Event Berhasil di Hapus!');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('fail', 'Gagal menghapus Fasilitas');
         }
 
-        News::destroy($news->id);
-        return redirect('/eventlist')->with('success','Event has been deleted!');
     }
 
     public function edit(News $news){
@@ -94,6 +106,35 @@ class NewsController extends Controller
         }
 
         News::where('id', $news['id'])->update($credentials);
-        return redirect('/eventlist')->with('success','The event has been updated!');
+        return redirect('/eventlist')->with('success','Event Berhasil di ubah!');
+    }
+
+    public function confirmation(News $news){
+        $news->status = "Accepted";
+        $news->message = "";
+        $news->save();
+        return redirect()->back()->with('success', 'Verifikasi Event Berhasil. Event telah ditampilkan di halaman Event');
+    }
+
+    public function reject(Request $request, News $news){
+        $news->status = "Rejected";
+        $news->message = $request['message'];
+        $news->save();
+        return redirect()->back()->with('success', 'Event Berhasil Ditolak');
+    }
+
+    public function search(Request $request){
+        if($request['type'] == "superadmin"){
+            return view('event.dashboardadmin',[
+                'title'=>'Event',
+                "post" => News::latest()->where("title","like","%".$request['search']."%")->paginate(8)
+            ]);
+        }else{
+            return view('event.postlist',[
+                'title'=>'Events',
+                'post' => News::where('account_id',auth()->user()->id)->where("title","like","%".$request['search']."%")->paginate(8)
+            ]);
+        }
+
     }
 }

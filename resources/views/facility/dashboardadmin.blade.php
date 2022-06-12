@@ -3,12 +3,12 @@
 @section('container')
 
 <div style="margin-top: 130px" class="container marketing">
-  <h1>Dashboard Fasilitas</h1>
+  <h1>Dashboard Fasilitas Manager</h1>
   <div style="margin-top: 30px">
     <p>Cari Nama Fasilitas:</p>
     <form action="/facility/search">
       <div class="input-group mb-3"> 
-        <input type="hidden" name="type" value="admin">
+        <input type="hidden" name="type" value="superadmin">
           <input type="text" class="form-control" placeholder="Cari..." name="search">
           <div class="input-group-append">
             <button class="btn btn-primary" type="submit">Cari</button>
@@ -16,7 +16,6 @@
       </div>
   </form>
   </div>
-  <a href="/facility/create" class="btn btn-primary mb-3 mt-3">Buat Fasilitas Baru</a>
 <div class="table-responsive">
   @if (session()->has('success'))
   <div class="alert alert-success p-3 mb-2 bg-success text-white" role="alert">
@@ -27,14 +26,6 @@
     {{ session('fail') }}
   </div>
   @endif
-  <div class="border border-primary" style="margin: 10px; padding: 10px">
-    <p>Info:</p>
-    <p>
-      <a class="badge bg-info"><i style="color: white" class="bi bi-eye"></i></a> : Detail 
-      <a class="badge bg-warning"><i style="color: white" class="bi bi-pencil"></i></a> : Ubah 
-      <a class="badge bg-danger"><i style="color: white" class="bi bi-trash"></i></a> : Hapus
-    </p>
-  </div>
     <table class="table table-striped table-sm">
       <thead>
         <tr>
@@ -63,13 +54,36 @@
             </td>
             <td>{{ $item['message'] }}</td>
             <td>
-              <a href="/facilty/detail/{{ $item['id'] }}" class="badge bg-info"><i class="bi bi-eye"></i></a>
-              <a href="/facilty/{{ $item['id'] }}/edit" class="badge bg-warning"><i class="bi bi-pencil"></i></a>
-                <form action="/facility/delete/{{ $item['id'] }}" method="post" class="d-inline">
-                  @method('delete')
-                  @csrf
-                  <button class="badge bg-danger border-0" onclick="return confirm('Are you sure?')"><i class="bi bi-trash"></i></button>
-                </form>
+              <a href="/facilty/detail/{{ $item['id'] }}" class="btn btn-sm bg-info" style="color: white">Detail</a>
+              <a href="/facility/dashboardadmin/confirmation/{{ $item['id'] }}" class="btn btn-sm bg-success" style="color: white">Terima</a>
+              <a class="btn btn-sm bg-danger" style="color: white" data-toggle="modal" data-target="#exampleModal">
+                Tolak
+              </a>
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="/facility/dashboardadmin/reject/{{ $item['id'] }}" method="post">
+                        @csrf
+                        <div style="margin: 10px">
+                          <p>Masukan alasan tolak:</p>
+                          <textarea name="message" id="message" cols="30" rows="10"></textarea>
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" style="color: white" class="btn bg-danger">Tolak</button>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                  </div>
+                </div>
+              </div>
             </td>
           </tr>
         @endforeach

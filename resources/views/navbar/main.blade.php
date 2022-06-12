@@ -43,10 +43,11 @@
       }
     </style>
   <title>{{ $title }}</title>
+  <link rel="icon" href="{{ asset('storage/website-image/pitoe.png') }}" type="image/icon type">
   </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: white;">
-      <a class="navbar-brand" href={{ url("/") }}>Navbar</a>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #dbdbdb">
+      <a class="navbar-brand" href={{ url("/") }}><img width="160px" height="60px" src="{{ asset('storage/website-image/kendhiicon.png') }}" alt=""></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -86,13 +87,30 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             @if (auth()->user()->is_admin >= 1)
-              <a class="dropdown-item" href={{ url("/eventlist") }}><i class="bi bi-pencil-fill"></i> Dashboard Event</a>
-              <a class="dropdown-item" href={{ url("/cafe/create") }}><i class="bi bi-pencil-fill"></i> Buat Menu Cafe Baru</a>
+
+              @if (auth()->user()->is_admin === 1)
+                <a class="dropdown-item" href={{ url("/eventlist") }}><i class="bi bi-pencil-fill"></i> Dashboard Event</a>
+              @else
+              <a class="dropdown-item" href={{ url("/event/dashboardadmin") }}><i class="bi bi-pencil-fill"></i> Dashboard Event</a>
+              @endif
+              
+              @if (auth()->user()->is_admin === 1)
+              <a class="dropdown-item" href={{ url("/cafe/dashboard") }}><i class="bi bi-pencil-fill"></i> Dashboard Cafe</a>
+              @else
+              <a class="dropdown-item" href={{ url("/cafe/dashboardadmin") }}><i class="bi bi-pencil-fill"></i> Dashboard Cafe</a>
+              @endif
+              
               <a class="dropdown-item" href={{ url("/category") }}><i class="bi bi-pencil-fill"></i> Kategori Makanan</a>
               <a class="dropdown-item" href={{ url("/reservation") }}><i class="bi bi-pencil-fill"></i> Dashboard Reservasi</a>
-              <a class="dropdown-item" href={{ url("/facility/list") }}><i class="bi bi-pencil-fill"></i> Dashboard Fasilitas</a>   
+              
+              @if (auth()->user()->is_admin === 1)
+              <a class="dropdown-item" href={{ url("/facility/list") }}><i class="bi bi-pencil-fill"></i> Dashboard Fasilitas</a>  
+              @else
+              <a class="dropdown-item" href={{ url("/facility/dashboardadmin") }}><i class="bi bi-pencil-fill"></i> Dashboard Fasilitas</a>  
+              @endif
             @endif
             @if (auth()->user()->is_admin === 2)
+              <a class="dropdown-item" href={{ url("/galery/dashboard") }}><i class="bi bi-pencil-fill"></i> Dashboard Galeri</a> 
               <a class="dropdown-item" href={{ url("/employee") }}><i class="bi bi-pencil-fill"></i> Dashboard Akun</a>
               @endif
             <li>
@@ -107,7 +125,7 @@
       </ul>
       </div>
     </nav>
-    <div style="margin-bottom: 5%"></div>
+    <div style="margin-bottom: 70px"></div>
     <div style="margin-bottom: 50px">
         @yield('container')
     </div>
@@ -120,6 +138,10 @@
         <a href=""><i class="bi bi-whatsapp"></i></a>
          / 
         <a href=""><i class="bi bi-instagram"></i></a>
+      </p>
+      <p>
+        Kec. Trawas, Kabupaten Mojokerto, Jawa Timur <br>
+        ©Kendhi Pitoe Park 2022
       </p>
       <p>
         <a href="#">Back to top</a>

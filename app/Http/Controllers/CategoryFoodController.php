@@ -89,7 +89,12 @@ class CategoryFoodController extends Controller
      */
     public function destroy(CategoryFood $categoryFood)
     {
-        CategoryFood::destroy($categoryFood->id);
-        return redirect('/category')->with('success','Category has been deleted!');
+        try {
+            CategoryFood::destroy($categoryFood->id);
+            return redirect('/category')->with('success','Category has been deleted!');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('fail', 'Gagal menghapus Kategori Makanan');
+        }
+
     }
 }

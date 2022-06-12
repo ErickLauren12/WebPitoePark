@@ -1,7 +1,8 @@
 @extends('navbar.main')
 
 @section('container')
-<div class="container marketing">
+<div style="margin-top: 130px" class="container marketing">
+  <div style="border: 1px solid black; padding: 20px">
     <h1>Membuat Kategori Makanan Baru</h1>
     <form method="post" action={{ url("/category/create") }}>
       @csrf
@@ -14,6 +15,8 @@
       </div>
     <button type="submit" class="btn btn-primary">Buat Kategori</button>
     </form>
+  </div>
+
     <br>
     <h1>Daftar Kategori Makanan</h1>
 <div class="table-responsive">

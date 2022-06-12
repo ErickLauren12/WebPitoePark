@@ -17,6 +17,14 @@ class GaleryController extends Controller
     {
         return view('galery.index',[
             'title'=>'Galery',
+            "result" => Galery::latest()->where('status','=','Accepted')->paginate(6)
+        ]);
+    }
+
+    public function dashboard()
+    {
+        return view('galery.dashboard',[
+            'title'=>'Galery',
             "result" => Galery::latest()->paginate(6)
         ]);
     }
@@ -57,7 +65,7 @@ class GaleryController extends Controller
         }
         
         Galery::create($credentials);
-        return redirect('/galery');
+        return redirect('/galery')->with('success', 'Gambar/ video Berhasil di Upload, Gambar/ video  akan diproses verifikasi');
     }
 
     /**
@@ -102,12 +110,34 @@ class GaleryController extends Controller
      */
     public function destroy(Galery $galery)
     {
-        if($galery['image']){
-            Storage::delete($galery['image']);
+        try {
+            if($galery['image']){
+                Storage::delete($galery['image']);
+            }
+    
+            Galery::destroy($galery->id);
+            return redirect('/galery');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('fail', 'Gagal menghapus Gambar/ video');
         }
-
-        Galery::destroy($galery->id);
-        return redirect('/galery');
     }
     
+    public function deletedashboard(Galery $galery){
+        try {
+            if($galery['image']){
+                Storage::delete($galery['image']);
+            }
+    
+            Galery::destroy($galery->id);
+            return redirect('/galery/dashboard');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('fail', 'Gagal menghapus Gambar/ video');
+        }
+    }
+
+    public function confirmation(Galery $galery){
+        $galery->status = "Accepted";
+        $galery->save();
+        return redirect()->back()->with('success', 'Verifikasi Gambar/ video  Berhasil. Gambar/ video  telah ditampilkan di halaman Galeri');
+    }
 }

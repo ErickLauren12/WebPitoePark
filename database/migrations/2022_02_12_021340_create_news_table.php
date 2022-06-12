@@ -19,6 +19,8 @@ class CreateNewsTable extends Migration
             $table->text('body');
             $table->text('excerpt');
             $table->string('image')->nullable();
+            $table->string("status")->default("Pending");
+            $table->string("message")->nullable();
             $table->unsignedBigInteger('account_id');
             $table->timestamp('published_at');
             $table->timestamps();

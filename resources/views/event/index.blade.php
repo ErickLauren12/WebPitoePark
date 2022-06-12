@@ -1,7 +1,7 @@
 @extends('navbar.main')
 
 @section('container')
-<div class="container marketing">
+<div style="margin-top: 130px" class="container marketing">
   <h1 style="margin: 20px" class="display-4">What's New?</h1>
 <div class="row">
   <hr class="featurette-divider">

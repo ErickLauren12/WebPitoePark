@@ -17,6 +17,13 @@ class FacilityController extends Controller
     {
         return view('facility.index',[
             'title'=>'Facility',
+            "facility" => Facility::latest()->where('status','=','Accepted')->paginate(6)
+        ]);
+    }
+
+    public function indexDashBoardAdmin(){
+        return view('facility.dashboardadmin',[
+            'title'=>'Facility',
             "facility" => Facility::latest()->paginate(6)
         ]);
     }
@@ -25,7 +32,7 @@ class FacilityController extends Controller
     {
         return view('facility.list',[
             'title'=>'Facility',
-            "facility" => Facility::all()
+            "facility" => Facility::latest()->paginate(6)
         ]);
     }
 
@@ -70,7 +77,7 @@ class FacilityController extends Controller
         $credentials['body'] = strip_tags($credentials['body']);
 
         Facility::create($credentials);
-        return redirect('/facility/list')->with('success','New event has been added!');
+        return redirect('/facility/list')->with('success','Fasilitas baru telah ditambahkan, Harap menunggu untuk diverifikasi');
     }
 
     /**
@@ -135,11 +142,45 @@ class FacilityController extends Controller
      */
     public function destroy(Facility $facility)
     {
-        if($facility['image']){
-            Storage::delete($facility['image']);
+        try {
+            if($facility['image']){
+                Storage::delete($facility['image']);
+            }
+    
+            Facility::destroy($facility->id);
+            return redirect('/facility')->with('success','Facility has been deleted!');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('fail', 'Gagal menghapus Fasilitas');
         }
 
-        Facility::destroy($facility->id);
-        return redirect('/facility')->with('success','Facility has been deleted!');
+    }
+
+    public function confirmation(Facility $facility){
+        $facility->status = "Accepted";
+        $facility->message = "";
+        $facility->save();
+        return redirect()->back()->with('success', 'Verifikasi Fasilitas Berhasil. Fasilitas telah ditampilkan di halaman Fasilitas');
+    }
+
+    public function reject(Request $request, Facility $facility){
+        $facility->status = "Rejected";
+        $facility->message = $request['message'];
+        $facility->save();
+        return redirect()->back()->with('success', 'Fasilitas Berhasil Ditolak');
+    }
+
+    public function search(Request $request){
+        if($request['type'] == "superadmin"){
+            return view('facility.dashboardadmin',[
+                'title'=>'Facility',
+                "facility" => Facility::latest()->where("title","like","%".$request['search']."%")->paginate(8)
+            ]);
+        }else{
+            return view('facility.list',[
+                'title'=>'Facility',
+                'facility' => Facility::latest()->where("title","like","%".$request['search']."%")->paginate(8)
+            ]);
+        }
+
     }
 }

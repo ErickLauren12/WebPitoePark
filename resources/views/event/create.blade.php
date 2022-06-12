@@ -1,9 +1,10 @@
 @extends('navbar.main')
 
 @section('container')
+<div style="margin-top: 130px" class="container marketing col-lg-5">
+
 <h1 class="mt-3 mb-3">Membuat Event Baru</h1>
 <hr class="featurette-divider">
-<div class="container marketing col-lg-5">
 
 <form method="post" action="/event/create" enctype="multipart/form-data">
     @csrf
@@ -16,7 +17,7 @@
     </div>
 
     <div class="mb-3">
-      <label for="image" class="form-label">Upload Gambar/ Video</label>
+      <label for="image" class="form-label">Upload Gambar</label>
 
       <img class="img-preview img-fluid mb-3 col-sm-5" alt="">
       <input class="form-control" @error('image') is-invalid @enderror type="file" id="image" name="image" onchange="previewImage()">

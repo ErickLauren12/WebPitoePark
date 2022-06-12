@@ -18,6 +18,7 @@ class CreateGaleriesTable extends Migration
             $table->string('image');
             $table->string('format');
             $table->unsignedBigInteger('account_id');
+            $table->string("status")->default("Pending");
             $table->timestamps();
         });
     }

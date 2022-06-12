@@ -19,6 +19,8 @@ class CreateFacilitiesTable extends Migration
             $table->text('body');
             $table->string('image')->nullable();
             $table->unsignedBigInteger('account_id');
+            $table->string("status")->default("Pending");
+            $table->string("message")->nullable();
             $table->timestamp('published_at');
             $table->timestamps();
         });

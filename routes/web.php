@@ -3,6 +3,7 @@
 use App\Account;
 use App\Cafe;
 use App\Facility;
+use App\Galery;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CafeController;
 use App\Http\Controllers\CategoryFoodController;
@@ -45,15 +46,22 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/event/create', [NewsController::class, 'createindex']);
     Route::post('/event/create', [NewsController::class, 'post']);
     Route::delete('/event/post/{news}', [NewsController::class, 'destroy']);
+    Route::get('/event/search', [NewsController::class, 'search']);
+
     Route::post('/galery/upload', [GaleryController::class, 'store']);
     Route::delete('/galery/delete/{galery}', [GaleryController::class, 'destroy']);
+
     Route::get('/cafe/create', [CafeController::class, 'create']);
     Route::post('/cafe/create', [CafeController::class, 'store']);
     Route::delete('/cafe/delete/{cafe}', [CafeController::class, 'destroy']);
     Route::get('/cafe/{cafe}/edit', [CafeController::class, 'edit']);
     Route::put('/cafe/edit/{cafe}', [CafeController::class, 'update']);
+    Route::get('/cafe/dashboard', [CafeController::class, 'indexDashBoard']);
+    Route::get('/cafe/search', [CafeController::class, 'search']);
+
     Route::post('/category/create', [CategoryFoodController::class, 'store']);
     Route::delete('/category/delete/{categoryFood}', [CategoryFoodController::class, 'destroy']);
+
     Route::get('/facility/list', [FacilityController::class, 'list']);
     Route::get('/facility/create', [FacilityController::class, 'create']);
     Route::post('/facility/create', [FacilityController::class, 'store']);
@@ -63,6 +71,8 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::post('/facility_reservation/create', [ReservationFacilityController::class, 'store']);
     Route::delete('/facility_reservation/delete/{reservationFacility}', [ReservationFacilityController::class, 'destroy']);
     Route::get('/facility_reservation', [ReservationFacilityController::class, 'index']);
+    Route::get('/facility/search', [FacilityController::class, 'search']);
+
     Route::get('/reservation', [ReservationController::class, 'index']);
     Route::get('/reservation/create', [ReservationController::class, 'create']);
     Route::post('/reservation/create', [ReservationController::class, 'store']);
@@ -70,9 +80,27 @@ Route::group(['middleware' => 'is_admin'], function () {
 
 Route::group(['middleware' => 'is_super_admin'], function () {
     Route::get('/employee', [AccountController::class, 'index']);
+    
     Route::post('/register', [AccountController::class, 'store']);
     Route::get('/register', [AccountController::class, 'index']);
+    
+    Route::get('/galery/dashboard', [GaleryController::class, 'dashboard']);
+    Route::get('/galery/confirmation/{galery}', [GaleryController::class, 'confirmation']);
+    Route::delete('/galery/delete/{galery}', [GaleryController::class, 'deletedashboard']);
+    
     Route::delete('/employee/delete/{account}', [AccountController::class, 'destroy']);
+
+    Route::get('/event/dashboardadmin', [NewsController::class, 'listDataAdmin']);
+    Route::get('/event/dashboardadmin/confirmation/{news}', [NewsController::class, 'confirmation']);
+    Route::post('/event/dashboardadmin/reject/{news}', [NewsController::class, 'reject']);
+
+    Route::get('/cafe/dashboardadmin', [CafeController::class, 'indexDashBoardAdmin']);
+    Route::get('/cafe/dashboardadmin/confirmation/{cafe}', [CafeController::class, 'confirmation']);
+    Route::post('/cafe/dashboardadmin/reject/{cafe}', [CafeController::class, 'reject']);
+
+    Route::get('/facility/dashboardadmin', [FacilityController::class, 'indexDashBoardAdmin']);
+    Route::get('/facility/dashboardadmin/confirmation/{facility}', [FacilityController::class, 'confirmation']);
+    Route::post('/facility/dashboardadmin/reject/{facility}', [FacilityController::class, 'reject']);
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
