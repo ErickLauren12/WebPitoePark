@@ -1,14 +1,16 @@
 @extends('navbar.main')
 
 @section('container')
-<div style="margin-top: 130px" class="container marketing">
+<div style="margin-top: 40px" class="container marketing">
+  <a href="{{ url('/eventlist') }}" style="margin-bottom: 30px" class="btn btn-light"><i class="bi bi-caret-left"></i><b>BACK</b></a>
+  <h1>{{ $detail['title'] }}</h1>
+  <p style="font-size: 15px">By {{ $detail->account->username }} <br> {{ $detail->published_at }}</p>
 <hr class="featurette-divider">
 <div class="row featurette">
-    <div class="col-md-7 order-md-2">
-      <h2 class="featurette-heading">{{ $detail['title'] }}</h2>
-      <p class="lead trix-content">{{ $detail['body'] }}</p>
-      <p>Ditulis oleh: {{ $detail->account->username }}</p>
-      <p><a class="btn btn-secondary" href="/event">Back</a></p>
+    <div class="col-md-7 order-md-2" style="font-size: 18px">
+      @php
+          echo($detail['body'])
+      @endphp  
     </div>
     <div class="col-md-5 order-md-1">
       

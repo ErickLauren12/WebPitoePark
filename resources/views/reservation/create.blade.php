@@ -1,8 +1,8 @@
-@extends('navbar.main')
+@extends('navbar.maindashboard')
 
 @section('container')
 
-<div style="margin-top: 130px" class="container marketing col-lg-5">
+<div class="container marketing col-lg-5" style="margin-bottom: 20px">
   <h1 class="mt-3 mb-3">Membuat Reservasi Baru</h1>
 <hr class="featurette-divider">
 
@@ -12,7 +12,7 @@
   </div>
   @endif
 
-<form method="post" action="/reservation/create" enctype="multipart/form-data">
+<form method="post" action="{{ url('/reservation/create') }}" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
       <label for="name" class="form-label">Nama Pemesan:</label>
@@ -23,7 +23,23 @@
     </div>
 
     <div class="mb-3">
-      <label for="name" class="form-label">Pesan:</label>
+      <label for="email" class="form-label">Email Pemesan:</label>
+      @error('email')
+            <p class="text-danger">{{ $message }}</p>
+        @enderror
+      <input type="email" class="form-control" id="email" name="email" autofocus value="{{ old('email') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="phone" class="form-label">No Telp Pemesan:</label>
+      @error('phone')
+            <p class="text-danger">{{ $message }}</p>
+        @enderror
+      <input type="tel" class="form-control" id="phone" name="phone" autofocus value="{{ old('phone') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="message" class="form-label">Pesan Tambahan (Contoh: Jumlah orang):</label>
       @error('description')
             <p class="text-danger">{{ $message }}</p>
         @enderror

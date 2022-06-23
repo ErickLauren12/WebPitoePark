@@ -1,12 +1,12 @@
-@extends('navbar.main')
+@extends('navbar.maindashboard')
 
 @section('container')
-<div style="margin-top: 130px" class="container marketing col-lg-5">
+<div class="container marketing">
 
 <h1 class="mt-3 mb-3">Membuat Event Baru</h1>
 <hr class="featurette-divider">
 
-<form method="post" action="/event/create" enctype="multipart/form-data">
+<form method="post" action="{{ url('/event/create') }}" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
       <label for="title" class="form-label">Judul</label>
@@ -32,7 +32,7 @@
             <p class="text-danger">{{ $message }}</p>
         @enderror
         <input id="body" type="hidden" name="body" value="{{ old('body') }}">
-        <trix-editor input="body"></trix-editor>
+        <trix-editor input="body" class="trix-content" style="height: 200px"></trix-editor>
     </div>
    
     <button type="submit" class="btn btn-primary">Buat Event</button>

@@ -23,6 +23,7 @@ class CreateNewsTable extends Migration
             $table->string("message")->nullable();
             $table->unsignedBigInteger('account_id');
             $table->timestamp('published_at');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

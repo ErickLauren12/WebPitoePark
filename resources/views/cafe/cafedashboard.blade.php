@@ -1,13 +1,13 @@
-@extends('navbar.main')
+@extends('navbar.maindashboard')
 
 @section('container')
-<div style="margin-top: 130px" class="container marketing">
+<div class="container marketing">
   <div style="margin-bottom: 20px"><h1>Dashboard Cafe</h1></div>
     
     <a href="/cafe/create" class="btn btn-primary mb-3">Buat Menu Baru</a>
     <div style="margin-top: 30px">
       <p>Cari Nama Makanan:</p>
-      <form action="/cafe/search">
+      <form action="{{ url('/cafe/search') }}">
         <div class="input-group mb-3"> 
           <input type="hidden" name="type" value="admin">
             <input type="text" class="form-control" placeholder="Cari..." name="search">
@@ -41,8 +41,8 @@
         <tr>
             <td>{{ $loop->iteration }}</td>
             <td>{{ $item['name'] }}</td>
-            <td><img style="width: 300px; height:200px;" src="{{ asset('storage/' . $item['image']) }}"></td>
-            <td>{{ $item['price'] }}</td>
+            <td><img style="width: 150px; height:90px;" src="{{ asset('storage/' . $item['image']) }}"></td>
+            <td>Rp.{{ $item['price'] }}</td>
             <td>{{ $item->category->name }}</td>
             <td>
               @if ($item['status'] == "Accepted")

@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Cafe extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'name', 'image', 'price', 'account_id', 'category_id'
     ];
@@ -23,7 +27,12 @@ class Cafe extends Model
     public function account(){
         return $this->belongsTo(Account::class);
     }
+    
     public function category(){
         return $this->belongsTo(CategoryFood::class);
+    }
+
+    public function log_cafe(){
+        return $this->hasMany(LogCafe::class);
     }
 }

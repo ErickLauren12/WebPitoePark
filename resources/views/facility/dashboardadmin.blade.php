@@ -1,8 +1,8 @@
-@extends('navbar.main')
+@extends('navbar.maindashboard')
 
 @section('container')
 
-<div style="margin-top: 130px" class="container marketing">
+<div class="container marketing">
   <h1>Dashboard Fasilitas Manager</h1>
   <div style="margin-top: 30px">
     <p>Cari Nama Fasilitas:</p>
@@ -33,6 +33,7 @@
           <th scope="col">Nama</th>
           <th scope="col">Tanggal</th>
           <th scope="col">Status</th>
+          <th scope="col">Privasi</th>
           <th scope="col">Pesan</th>
           <th scope="col">Aksi</th>
         </tr>
@@ -52,11 +53,49 @@
               <p class="p-3 mb-2 bg-danger" style="color: white">{{ $item['status'] }}</p>
               @endif 
             </td>
+            <td>
+              @if ($item['status'] == "Accepted")
+              <p class="p-3 mb-2 bg-success text-white">Dipublish</p>
+              @else
+              <p class="p-3 mb-2 bg-danger text-white">Draft</p>   
+              @endif
+            </td>
             <td>{{ $item['message'] }}</td>
             <td>
-              <a href="/facilty/detail/{{ $item['id'] }}" class="btn btn-sm bg-info" style="color: white">Detail</a>
-              <a href="/facility/dashboardadmin/confirmation/{{ $item['id'] }}" class="btn btn-sm bg-success" style="color: white">Terima</a>
-              <a class="btn btn-sm bg-danger" style="color: white" data-toggle="modal" data-target="#exampleModal">
+              @if ($item['status'] == "Accepted")
+              <a href="/facility_detail_dashboard/{{ $item['id'] }}" class="btn bg-info" style="color: white">Detail</a>
+              <a class="btn bg-danger" style="color: white" data-toggle="modal" data-target="#exampleModal1">
+                Sembunyikan
+              </a>
+              <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Sembunyikan</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="{{ url('/facility/dashboardadmin/reject/'.$item['id']) }}" method="post">
+                        @csrf
+                        <div style="margin: 10px">
+                          <p>Masukan alasan Sembunyikan:</p>
+                          <textarea name="message" id="message" cols="30" rows="10"></textarea>
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" style="color: white" class="btn bg-danger">Sembunyikan</button>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              @else
+              <a href="/facility_detail_dashboard/{{ $item['id'] }}" class="btn bg-info" style="color: white">Detail</a>
+              <a href="/facility/dashboardadmin/confirmation/{{ $item['id'] }}" class="btn bg-success" style="color: white">Terima</a>
+              <a class="btn bg-danger" style="color: white" data-toggle="modal" data-target="#exampleModal">
                 Tolak
               </a>
               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -69,7 +108,7 @@
                       </button>
                     </div>
                     <div class="modal-body">
-                      <form action="/facility/dashboardadmin/reject/{{ $item['id'] }}" method="post">
+                      <form action="{{ url('/facility/dashboardadmin/reject/'.$item['id']) }}" method="post">
                         @csrf
                         <div style="margin: 10px">
                           <p>Masukan alasan tolak:</p>
@@ -84,6 +123,8 @@
                   </div>
                 </div>
               </div>
+              @endif
+
             </td>
           </tr>
         @endforeach

@@ -1,12 +1,12 @@
-@extends('navbar.main')
+@extends('navbar.maindashboard')
 
 @section('container')
 
-<div style="margin-top: 130px" class="container marketing">
+<div class="container marketing">
   <h1>Dashboard Fasilitas</h1>
   <div style="margin-top: 30px">
     <p>Cari Nama Fasilitas:</p>
-    <form action="/facility/search">
+    <form action="{{ url('/facility/search') }}">
       <div class="input-group mb-3"> 
         <input type="hidden" name="type" value="admin">
           <input type="text" class="form-control" placeholder="Cari..." name="search">
@@ -27,14 +27,6 @@
     {{ session('fail') }}
   </div>
   @endif
-  <div class="border border-primary" style="margin: 10px; padding: 10px">
-    <p>Info:</p>
-    <p>
-      <a class="badge bg-info"><i style="color: white" class="bi bi-eye"></i></a> : Detail 
-      <a class="badge bg-warning"><i style="color: white" class="bi bi-pencil"></i></a> : Ubah 
-      <a class="badge bg-danger"><i style="color: white" class="bi bi-trash"></i></a> : Hapus
-    </p>
-  </div>
     <table class="table table-striped table-sm">
       <thead>
         <tr>
@@ -63,12 +55,12 @@
             </td>
             <td>{{ $item['message'] }}</td>
             <td>
-              <a href="/facilty/detail/{{ $item['id'] }}" class="badge bg-info"><i class="bi bi-eye"></i></a>
-              <a href="/facilty/{{ $item['id'] }}/edit" class="badge bg-warning"><i class="bi bi-pencil"></i></a>
-                <form action="/facility/delete/{{ $item['id'] }}" method="post" class="d-inline">
+              <a href="/facility_detail_dashboard/{{ $item['id'] }}" class="btn bg-info">Detail</a>
+              <a href="/facilty/{{ $item['id'] }}/edit" class="btn bg-warning">Ubah</a>
+                <form action="{{ url('/facility/delete/'.$item['id']) }}" method="post" class="d-inline">
                   @method('delete')
                   @csrf
-                  <button class="badge bg-danger border-0" onclick="return confirm('Are you sure?')"><i class="bi bi-trash"></i></button>
+                  <button class="btn bg-danger" onclick="return confirm('Are you sure?')">Hapus</button>
                 </form>
             </td>
           </tr>

@@ -12,11 +12,17 @@ use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\GaleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Location;
+use App\Http\Controllers\LogCafeController;
+use App\Http\Controllers\LogController;
+use App\Http\Controllers\LogFacilityController;
+use App\Http\Controllers\LogGalerieController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogNewsController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReservationFacilityController;
+use App\LogNews;
 use App\ReservationFacility;
 use Illuminate\Support\Facades\Route;
 
@@ -47,7 +53,9 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::post('/event/create', [NewsController::class, 'post']);
     Route::delete('/event/post/{news}', [NewsController::class, 'destroy']);
     Route::get('/event/search', [NewsController::class, 'search']);
+    Route::get('/detail_dashboard/{cari}', [NewsController::class, 'showDashboard']);
 
+    Route::get('/galery/dashboard_pegawai', [GaleryController::class, 'dashboardPegawai']);
     Route::post('/galery/upload', [GaleryController::class, 'store']);
     Route::delete('/galery/delete/{galery}', [GaleryController::class, 'destroy']);
 
@@ -72,10 +80,16 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::delete('/facility_reservation/delete/{reservationFacility}', [ReservationFacilityController::class, 'destroy']);
     Route::get('/facility_reservation', [ReservationFacilityController::class, 'index']);
     Route::get('/facility/search', [FacilityController::class, 'search']);
+    Route::get('/facility_detail_dashboard/{cari}', [FacilityController::class, 'showDashboard']);
 
     Route::get('/reservation', [ReservationController::class, 'index']);
     Route::get('/reservation/create', [ReservationController::class, 'create']);
     Route::post('/reservation/create', [ReservationController::class, 'store']);
+
+    Route::get('/employee/edit', [AccountController::class, 'indexEmployee']);
+    Route::post('/employee/editStore', [AccountController::class, 'updatePassword']);
+
+    Route::get('/dashboardPegawai',[AccountController::class, 'indexDashboard']);
 });
 
 Route::group(['middleware' => 'is_super_admin'], function () {
@@ -89,6 +103,7 @@ Route::group(['middleware' => 'is_super_admin'], function () {
     Route::delete('/galery/delete/{galery}', [GaleryController::class, 'deletedashboard']);
     
     Route::delete('/employee/delete/{account}', [AccountController::class, 'destroy']);
+    Route::get('/employee/search', [AccountController::class, 'search']);
 
     Route::get('/event/dashboardadmin', [NewsController::class, 'listDataAdmin']);
     Route::get('/event/dashboardadmin/confirmation/{news}', [NewsController::class, 'confirmation']);
@@ -101,6 +116,18 @@ Route::group(['middleware' => 'is_super_admin'], function () {
     Route::get('/facility/dashboardadmin', [FacilityController::class, 'indexDashBoardAdmin']);
     Route::get('/facility/dashboardadmin/confirmation/{facility}', [FacilityController::class, 'confirmation']);
     Route::post('/facility/dashboardadmin/reject/{facility}', [FacilityController::class, 'reject']);
+
+    Route::get('/log/event', [LogNewsController::class, 'index']);
+    Route::get('/log/event/search', [LogNewsController::class, 'find']);
+
+    Route::get('/log/cafe', [LogCafeController::class, 'index']);
+    Route::get('/log/cafe/search', [LogCafeController::class, 'find']);
+
+    Route::get('/log/galery', [LogGalerieController::class, 'index']);
+    Route::get('/log/galery/search', [LogGalerieController::class, 'find']);
+
+    Route::get('/log/facility', [LogFacilityController::class, 'index']);
+    Route::get('/log/facility/search', [LogFacilityController::class, 'find']);
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');

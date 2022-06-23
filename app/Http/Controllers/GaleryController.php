@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Galery;
+use App\LogGalerie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class GaleryController extends Controller
@@ -15,17 +17,25 @@ class GaleryController extends Controller
      */
     public function index()
     {
-        return view('galery.index',[
-            'title'=>'Galery',
-            "result" => Galery::latest()->where('status','=','Accepted')->paginate(6)
+        return view('galery.index', [
+            'title' => 'Galery',
+            "result" => Galery::latest()->where('status', '=', 'Accepted')->paginate(6)
         ]);
     }
 
     public function dashboard()
     {
-        return view('galery.dashboard',[
-            'title'=>'Galery',
+        return view('galery.dashboard', [
+            'title' => 'Galery',
             "result" => Galery::latest()->paginate(6)
+        ]);
+    }
+
+    public function dashboardPegawai()
+    {
+        return view('galery.dashboardpegawai', [
+            'title' => 'Galery',
+            "result" => Galery::where('account_id', auth()->user()->id)->latest()->paginate(6)
         ]);
     }
 
@@ -36,7 +46,6 @@ class GaleryController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -51,21 +60,28 @@ class GaleryController extends Controller
             'image' => ['required']
         ]);
 
-        if($request->file('image')){
+        if ($request->file('image')) {
             $credentials['image'] = $request->file('image')->store('galery');
         }
 
         $credentials['account_id'] = auth()->user()->id;
         $fileFormat = $request->file('image')->getClientOriginalExtension();
 
-        if($fileFormat == "mp4" || $fileFormat == "flv" || $fileFormat == "m3u8" || $fileFormat == "ts" || $fileFormat == "3gp" || $fileFormat == "mov" || $fileFormat == "avi" || $fileFormat == "wmv"){
+        if ($fileFormat == "mp4" || $fileFormat == "flv" || $fileFormat == "m3u8" || $fileFormat == "ts" || $fileFormat == "3gp" || $fileFormat == "mov" || $fileFormat == "avi" || $fileFormat == "wmv") {
             $credentials['format'] = "Video";
-        }else{
+        } else {
             $credentials['format'] = "Gambar";
         }
-        
-        Galery::create($credentials);
-        return redirect('/galery')->with('success', 'Gambar/ video Berhasil di Upload, Gambar/ video  akan diproses verifikasi');
+
+        $result = Galery::create($credentials);
+
+        $log = new LogGalerie();
+        $log->action = "Membuat";
+        $log->id_galery = $result->id;
+        $log->id_account = auth()->user()->id;
+        $log->save();
+
+        return redirect('/galery/dashboard_pegawai')->with('success', 'Gambar/ video Berhasil di Upload, Gambar/ video  akan diproses verifikasi');
     }
 
     /**
@@ -111,31 +127,37 @@ class GaleryController extends Controller
     public function destroy(Galery $galery)
     {
         try {
-            if($galery['image']){
-                Storage::delete($galery['image']);
-            }
-    
-            Galery::destroy($galery->id);
+
+            $data = Galery::find($galery->id);
+            $data->delete();
+
+            $log = new LogGalerie();
+            $log->action = "Menghapus";
+            $log->id_galery = $galery->id;
+            $log->id_account = auth()->user()->id;
+            $log->save();
+
             return redirect('/galery');
         } catch (\Throwable $th) {
             return redirect()->back()->with('fail', 'Gagal menghapus Gambar/ video');
         }
     }
-    
-    public function deletedashboard(Galery $galery){
+
+    public function deletedashboard(Galery $galery)
+    {
         try {
-            if($galery['image']){
-                Storage::delete($galery['image']);
-            }
-    
-            Galery::destroy($galery->id);
+
+            $data = Galery::find($galery->id);
+            $data->delete();
+
             return redirect('/galery/dashboard');
         } catch (\Throwable $th) {
             return redirect()->back()->with('fail', 'Gagal menghapus Gambar/ video');
         }
     }
 
-    public function confirmation(Galery $galery){
+    public function confirmation(Galery $galery)
+    {
         $galery->status = "Accepted";
         $galery->save();
         return redirect()->back()->with('success', 'Verifikasi Gambar/ video  Berhasil. Gambar/ video  telah ditampilkan di halaman Galeri');

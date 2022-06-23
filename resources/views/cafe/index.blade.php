@@ -1,7 +1,7 @@
 @extends('navbar.main')
 
 @section('container')
-<div style="margin-top: 130px" class="container marketing">
+<div style="margin-top: 40px" class="container marketing">
 <h1 style="margin: 20px" class="display-4">Menu di Cafe Kendhi Pitoe Park</h1>
 <div class="album py-5 bg-light">
   @if (session()->has('success'))
@@ -10,64 +10,79 @@
   </div>
   @endif
   
-    <div class="container">
-      <form action="/cafe">
-        <div class="input-group mb-3"> 
-            <input type="text" class="form-control" placeholder="Cari..." name="search" value="{{ request('search') }}">
-            <div class="input-group-append">
-              <button class="btn btn-danger" type="submit">Cari</button>
-            </div>  
+  <div class="container py-5">
+    <div class="row">
+        <div class="col-lg-3">
+            <h1 class="h2 pb-4">Filter</h1>
+            <ul class="list-unstyled templatemo-accordion">
+                <li class="pb-3">
+                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                        Cari Menu
+                        <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
+                    </a>
+                    <ul class="collapse show list-unstyled pl-3">
+                      <form action="{{ url('/cafe') }}">
+                        <div class="input-group mb-3"> 
+                            <input type="text" class="form-control" placeholder="Masukan Nama Menu" name="search" value="{{ request('search') }}">
+                            <div class="input-group-append">
+                              <button class="btn btn-danger" type="submit">Cari</button>
+                            </div>  
+                        </div>
+                    </form>
+                    </ul>
+                </li>
+                <li class="pb-3">
+                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                        Cari Kategori
+                      <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
+                    </a>
+                    <ul id="collapseTwo" class="collapse list-unstyled pl-3">
+                      <form method="get" action="{{ url('/cafe') }}">
+                        @csrf
+                        <div class="mb-3">
+                          <select class="dropdown-toggle btn btn-secondary" name="category_id">
+                            <option value="">No Filter</option>
+                            @foreach ($category as $item)
+                              @if (request("category_id") == $item->id)
+                                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                              @else
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                              @endif 
+                            @endforeach
+                          </select>
+                          <button type="submit" class="btn btn-primary">Cari</button>
+                        </div>
+                      </form>
+                    </ul>
+                </li>
+            </ul>
         </div>
-    </form>
-      <form method="get" action="/cafe">
-        @csrf
-        <div class="mb-3">
-          <label for="categoryFood" class="form-label">Kategori Makanan: </label>
-          <select class="dropdown-toggle btn btn-secondary" name="category_id">
-            <option value="">No Filter</option>
-            @foreach ($category as $item)
-              @if (request("category_id") == $item->id)
-                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
-              @else
-                <option value="{{ $item->id }}">{{ $item->name }}</option>
-              @endif 
-            @endforeach
-          </select>
-          <button type="submit" class="btn btn-primary">Cari</button>
-        </div>
-      </form>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            @foreach ($result as $item)
-            <div class="col">
-                <div class="card shadow-sm">
-                  <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{ asset('storage/' . $item['image']) }}">
-                  <div class="card-body">
-                    <p class="card-text">
-                      <span class="badge badge-primary">{{ $item->category->name }}</span><br>
-                      {{ $item['name'] }}<br>
-                      Harga: Rp.{{ $item['price'] }}<br>
-                    </p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      @auth
-                      @if (auth()->user()->is_admin === 1)
-                      <div class="btn-group">
-                        <a href="/cafe/{{ $item['id'] }}/edit"><button type="button" class="btn btn-sm btn-outline-secondary" style="color: black">Edit</button></a>
-                        <form action="/cafe/delete/{{ $item['id'] }}" method="post" class="d-inline">
-                          @method('delete')
-                          @csrf
-                          <button type="submit" class="btn btn-sm bg-danger" style="color: white" onclick="return confirm('Are you sure?')">Delete</button>
-                        </form>
-                      </div>
-                      @endif
-                      @endauth
+
+        <div class="col-lg-9">
+            <div class="row">
+              @foreach ($result as $item)
+              <div class="col-md-4">
+                <div class="card mb-4 product-wap rounded-0">
+                    <div class="card rounded-0">
+                        <img class="card-img rounded-0" height="170px" src="{{ asset('storage/' . $item['image']) }}">
                     </div>
-                  </div>
+                    <div class="card-body">
+                        <span class="badge badge-primary">{{ $item->category->name }}</span><br>
+                        {{ $item['name'] }}<br>
+                        <hr class="featurette-divider">
+                        <p class="text-center mb-0">Rp.{{ $item['price'] }}</p>
+                    </div>
                 </div>
-              </div>
-            @endforeach
-        </div><br>
-        {{ $result->links() }}
+            </div>
+                @endforeach
+            </div>
+            <div div="row">
+              {{ $result->links() }}
+            </div>
+        </div>
+
     </div>
+</div> 
 </div>
 </div>
 @endsection

@@ -15,9 +15,40 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return view('employee.index',[
-            'title'=>'Employee',
-            "accounts"=>Account::where('is_admin','1')->latest()->paginate(20)
+        return view('employee.index', [
+            'title' => 'Employee',
+            "accounts" => Account::where('is_admin', '1')->latest()->paginate(8)
+        ]);
+    }
+
+    public function indexEmployee()
+    {
+        return view('employee.edit', [
+            'title' => 'Employee',
+        ]);
+    }
+
+    public function indexDashboard()
+    {
+        return view('navbar.maindashboard', [
+            'title' => 'Employee',
+        ]);
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $id = $request->get('id');
+        $account = Account::find($id);
+        $account->password = Hash::make($request->get('password'));
+        $account->save();
+        return redirect()->back()->with('success', 'Password Berhasil Tersimpan');
+    }
+
+    public function search(Request $request)
+    {
+        return view('employee.index', [
+            'title' => 'Employee',
+            "accounts" => Account::latest()->where("name", "like", "%" . $request['search'] . "%")->where('is_admin', '1')->paginate(8)
         ]);
     }
 
@@ -39,16 +70,22 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'username' => ['required','max:255'],
-            'phone' => ['required', 'min:3','max:255'],
-            'password' => ['required', 'min:4','max:255']
-        ]);
-        $validatedData['password'] = Hash::make($validatedData['password']);
+        try {
+            $validatedData = $request->validate([
+                'username' => ['required', 'max:255'],
+                'phone' => ['required', 'min:3', 'max:255'],
+                'password' => ['required', 'min:4', 'max:255'],
+                'name' => ['required', 'min:4', 'max:255'],
+                'address' => ['required', 'min:4', 'max:255'],
+            ]);
+            $validatedData['password'] = Hash::make($validatedData['password']);
 
-        Account::create($validatedData);
-        $request->session()->flash('success','Registration successfull!');
-        return redirect('/employee');
+            Account::create($validatedData);
+            $request->session()->flash('success', 'Registration successfull!');
+            return redirect('/employee');
+        } catch (\Throwable $e) {
+            return redirect('/employee')->with('fail', 'Registration Failed!');
+        }
     }
 
     /**
@@ -93,7 +130,9 @@ class AccountController extends Controller
      */
     public function destroy(Account $account)
     {
-        Account::destroy($account->id);
-        return redirect('/employee')->with('success','Account has been deleted!');
+        $account = Account::find($account->id);
+        $account['password'] = "hapus";
+        $account->delete();
+        return redirect('/employee')->with('success', 'Account has been deleted!');
     }
 }

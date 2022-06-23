@@ -1,7 +1,7 @@
-@extends('navbar.main')
+@extends('navbar.maindashboard')
 
 @section('container')
-<div style="margin-top: 130px" class="container marketing">
+<div class="container marketing">
     <h1>Facility Editor Menu</h1>
     <form method="post" action="/facility_reservation/create">
       @csrf
@@ -38,7 +38,7 @@
             <td>{{ $item['name'] }}</td>
             <td>{{ $item['created_at'] }}</td>
             <td>
-                <form action="/facility_reservation/delete/{{ $item['id'] }}" method="post" class="d-inline">
+                <form action="{{ url('/facility_reservation/delete/'.$item['id']) }}" method="post" class="d-inline">
                   @method('delete')
                   @csrf
                   <button class="badge bg-danger border-0" onclick="return confirm('Are you sure?')">Delete</button>

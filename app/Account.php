@@ -4,11 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Account extends Authenticatable
 {
+    use SoftDeletes;
+
     protected $fillable = [
-        'username', 'phone', 'password',
+        'username', 'phone', 'password', 'name', 'address'
     ];
 
     protected $hidden = [
@@ -21,5 +24,21 @@ class Account extends Authenticatable
 
     public function cafe(){
         return $this->hasMany(Cafe::class);
+    }
+
+    public function log_news(){
+        return $this->hasMany(LogNews::class);
+    }
+
+    public function log_galery(){
+        return $this->hasMany(LogGalerie::class);
+    }
+
+    public function log_facility(){
+        return $this->hasMany(LogFacility::class);
+    }
+
+    public function log_cafe(){
+        return $this->hasMany(LogCafe::class);
     }
 }

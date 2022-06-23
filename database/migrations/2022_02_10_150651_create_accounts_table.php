@@ -14,9 +14,12 @@ class CreateAccountsTable extends Migration
     public function up()
     {
         Schema::create('accounts', function (Blueprint $table) {
+            $table->softDeletes();
             $table->id();
-            $table->string('username')->unique();
+            $table->string('username');
             $table->string('phone');
+            $table->string('name');
+            $table->string('address');
             $table->string('password');
             $table->integer('is_admin')->default('1');
             $table->timestamps();

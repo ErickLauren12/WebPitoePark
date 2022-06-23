@@ -13,6 +13,6 @@ class AccountSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('accounts')->insert(['username' => 'dani123', 'phone'=>'081332523444','password'=>Hash::make('Password123'), 'is_admin'=>'2']);
+        DB::table('accounts')->insert(['username' => 'dani123', 'phone'=>'081332523444','password'=>Hash::make('Password123'), 'name'=>'Dani Dano', 'address'=>'jalan kebaruan','is_admin'=>'2']);
     }
 }

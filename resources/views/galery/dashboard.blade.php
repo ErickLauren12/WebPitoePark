@@ -1,7 +1,7 @@
-@extends('navbar.main')
+@extends('navbar.maindashboard')
 
 @section('container')
-<div style="margin-top: 130px" class="container marketing">
+<div class="container marketing">
   <h1>Dashboard Galery Manager</h1>
 <div class="table-responsive">
   @if (session()->has('success'))
@@ -49,15 +49,14 @@
                 <form action="/galery/delete/{{ $item['id'] }}" method="post" class="d-inline">
                     @method('delete')
                     @csrf
-                    <button class="btn btn-sm bg-danger" style="color: white" onclick="return confirm('Apakah anda yakin untuk menghapus file ini?')">Delete</button>
+                    <button class="btn bg-danger" style="color: white" onclick="return confirm('Apakah anda yakin untuk menghapus file ini?')">Hapus</button>
                   </form>
                 @else
-                <a href="/galery/confirmation/{{ $item['id'] }}" class="btn btn-sm bg-info" style="color: white">Terima</a>
-
-                <form action="//galery/delete/{{ $item['id'] }}" method="post" class="d-inline">
+                <a href="/galery/confirmation/{{ $item['id'] }}" class="btn btn-sm bg-info mb-3" style="color: white">Terima</a>
+                <form action="/galery/delete/{{ $item['id'] }}" method="post">
                   @method('delete')
                   @csrf
-                  <button class="btn btn-sm bg-danger" style="color: white" onclick="return confirm('Apakah anda yakin untuk menolak file ini dan menghapusnya?')">Tolak</button>
+                  <button class="btn bg-danger" style="color: white" onclick="return confirm('Apakah anda yakin untuk menolak gamabr/ video ini dan menghapusnya?')">Tolak</button>
                 </form>
                 @endif 
             </td>

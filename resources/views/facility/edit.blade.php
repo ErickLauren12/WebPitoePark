@@ -1,11 +1,11 @@
-@extends('navbar.main')
+@extends('navbar.maindashboard')
 
 @section('container')
 <h1 class="mt-3 mb-3">Ubah Fasilitas</h1>
 <hr class="featurette-divider">
-<div class="container marketing col-lg-5">
+<div class="container marketing">
 
-<form method="post" action="/facility/edit/{{ $facility->id }}" enctype="multipart/form-data">
+<form method="post" action="{{ url('/facility/edit/'.$facility->id) }}" enctype="multipart/form-data">
     @method('put')
     @csrf
     <div class="mb-3">
@@ -35,7 +35,7 @@
             <p class="text-danger">{{ $message }}</p>
         @enderror
         <input id="body" type="hidden" name="body" value="{{ old('body', $facility->body) }}">
-        <trix-editor input="body"></trix-editor>
+        <trix-editor input="body" style="height: 200px"></trix-editor>
     </div>
    
     <button type="submit" class="btn btn-primary">Ubah Fasilitas</button>

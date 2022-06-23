@@ -22,6 +22,7 @@ class CreateCafesTable extends Migration
             $table->string("message")->nullable();
             $table->unsignedBigInteger('account_id');
             $table->unsignedBigInteger('category_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

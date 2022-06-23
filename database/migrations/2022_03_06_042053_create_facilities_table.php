@@ -14,6 +14,7 @@ class CreateFacilitiesTable extends Migration
     public function up()
     {
         Schema::create('facilities', function (Blueprint $table) {
+           
             $table->id();
             $table->string('title');
             $table->text('body');
@@ -22,6 +23,7 @@ class CreateFacilitiesTable extends Migration
             $table->string("status")->default("Pending");
             $table->string("message")->nullable();
             $table->timestamp('published_at');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

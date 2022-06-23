@@ -1,11 +1,11 @@
-@extends('navbar.main')
+@extends('navbar.maindashboard')
 
 @section('container')
-<div style="margin-top: 130px" class="container marketing">
+<div class="container marketing">
   <h1 class="mt-3 mb-3">Halaman Dashboard Event</h1>
     <a href="/event/create" class="btn btn-primary mb-3">Buat Event Baru</a>
     <p>Cari Judul Event:</p>
-    <form action="/event/search">
+    <form action="/event/search" method="GET">
       <div class="input-group mb-3"> 
         <input type="hidden" name="type" value="admin"><br>
         <input type="text" class="form-control" placeholder="Cari..." name="search">
@@ -24,14 +24,6 @@
     {{ session('fail') }}
   </div>
   @endif
-  <div class="border border-primary" style="margin: 10px; padding: 10px">
-    <p>Info:</p>
-    <p>
-      <a class="badge bg-info"><i style="color: white" class="bi bi-eye"></i></a> : Detail 
-      <a class="badge bg-warning"><i style="color: white" class="bi bi-pencil"></i></a> : Ubah 
-      <a class="badge bg-danger"><i style="color: white" class="bi bi-trash"></i></a> : Hapus
-    </p>
-  </div>
     <table class="table table-striped table-sm">
       <thead>
         <tr>
@@ -62,13 +54,13 @@
               {{ $item['message'] }}
             </td>
             <td>
-              <a href="/detail/{{ $item['id'] }}" class="badge bg-info"><i class="bi bi-eye"></i></a>
-              <a href="/detail/{{ $item['id'] }}/edit" class="badge bg-warning"><i class="bi bi-pencil"></i></a>
+              <a href="/detail_dashboard/{{ $item['id'] }}" class="btn bg-info">Detail</a>
+              <a href="/detail/{{ $item['id'] }}/edit" class="btn bg-warning">Edit</a>
 
-              <form action="/event/post/{{ $item['id'] }}" method="post" class="d-inline">
+              <form action="{{ url('/event/post/'.$item['id']) }}" method="post" class="d-inline">
                 @method('delete')
                 @csrf
-                <button class="badge bg-danger border-0" onclick="return confirm('Are you sure?')"><i class="bi bi-trash"></i></button>
+                <button class="btn bg-danger border-0" onclick="return confirm('Are you sure?')">Hapus</button>
               </form> 
             </td>
           </tr>

@@ -2,7 +2,7 @@
 
 @section('container')
  <!-- START THE FEATURETTES -->
-<div style="margin-top: 130px" class="container marketing">
+<div style="margin-top: 40px" class="container marketing">
 
   <h1 class="display-4">Tentang Kami</h1>
   <hr class="featurette-divider">
@@ -33,8 +33,8 @@
 
  <div class="row featurette">
   <div style="text-align: center">
-    <img height="300px" width="300px" src="{{ asset('storage/website-image/pitoe.png') }}" alt="">
-    <img style="margin-left: 160px" height="300px" width="300px" src="{{ asset('storage/website-image/bumdes.jpeg') }}" alt="">
+    <img height="300px" width="300px" src="{{ asset('storage/website-image/bumdes.jpeg') }}" alt="">
+    <img style="margin-left: 160px" height="300px" width="300px" src="{{ asset('storage/website-image/pitoe.png') }}" alt="">
   </div>
 </div>
 

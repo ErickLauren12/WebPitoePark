@@ -1,11 +1,11 @@
-@extends('navbar.main')
+@extends('navbar.maindashboard')
 
 @section('container')
 <h1 class="mt-3 mb-3">Edit Menu</h1>
 <hr class="featurette-divider">
 <div class="container marketing col-lg-5">
 
-<form method="post" action="/cafe/edit/{{ $cafe->id }}" enctype="multipart/form-data">
+<form method="post" action="{{ url('/cafe/edit/'.$cafe->id) }}" enctype="multipart/form-data">
   @method('put')
     @csrf
     <div class="mb-3">

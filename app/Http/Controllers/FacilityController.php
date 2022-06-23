@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Facility;
+use App\LogFacility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,31 +16,41 @@ class FacilityController extends Controller
      */
     public function index()
     {
-        return view('facility.index',[
-            'title'=>'Facility',
-            "facility" => Facility::latest()->where('status','=','Accepted')->paginate(6)
+        return view('facility.index', [
+            'title' => 'Facility',
+            "facility" => Facility::latest()->where('status', '=', 'Accepted')->paginate(6)
         ]);
     }
 
-    public function indexDashBoardAdmin(){
-        return view('facility.dashboardadmin',[
-            'title'=>'Facility',
+    public function indexDashBoardAdmin()
+    {
+        return view('facility.dashboardadmin', [
+            'title' => 'Facility',
             "facility" => Facility::latest()->paginate(6)
         ]);
     }
 
     public function list()
     {
-        return view('facility.list',[
-            'title'=>'Facility',
-            "facility" => Facility::latest()->paginate(6)
+        return view('facility.list', [
+            'title' => 'Facility',
+            "facility" => Facility::where('account_id', auth()->user()->id)->latest()->paginate(6)
         ]);
     }
 
-    public function detail($id){
-        return view('facility.detail',[
-            'title'=>'Facility',
-           "detail"=>Facility::find($id) 
+    public function detail($id)
+    {
+        return view('facility.detail', [
+            'title' => 'Facility',
+            "detail" => Facility::find($id)
+        ]);
+    }
+
+    public function showDashboard($id)
+    {
+        return view('facility.detaildashboard', [
+            'title' => 'Facility',
+            "detail" => Facility::find($id)
         ]);
     }
 
@@ -50,8 +61,8 @@ class FacilityController extends Controller
      */
     public function create()
     {
-        return view('facility.create',[
-            'title'=>'Add new Facility',
+        return view('facility.create', [
+            'title' => 'Add new Facility',
         ]);
     }
 
@@ -65,19 +76,26 @@ class FacilityController extends Controller
     {
         $credentials = $request->validate([
             'title' => ['required', 'max:255'],
-            'image' => ['image','file'],
-            'body'=>['required']
+            'image' => ['image', 'file'],
+            'body' => ['required']
         ]);
 
-        if($request->file('image')){
+        if ($request->file('image')) {
             $credentials['image'] = $request->file('image')->store('facility-image');
         }
 
         $credentials['account_id'] = auth()->user()->id;
         $credentials['body'] = strip_tags($credentials['body']);
 
-        Facility::create($credentials);
-        return redirect('/facility/list')->with('success','Fasilitas baru telah ditambahkan, Harap menunggu untuk diverifikasi');
+        $result = Facility::create($credentials);
+
+        $log = new LogFacility();
+        $log->action = "Membuat";
+        $log->id_facility = $result->id;
+        $log->id_account = auth()->user()->id;
+        $log->save();
+
+        return redirect('/facility/list')->with('success', 'Fasilitas baru telah ditambahkan, Harap menunggu untuk diverifikasi');
     }
 
     /**
@@ -99,9 +117,9 @@ class FacilityController extends Controller
      */
     public function edit(Facility $facility)
     {
-        return view('facility.edit',[
-            'title'=>'Edit',
-            "facility" => $facility   
+        return view('facility.edit', [
+            'title' => 'Edit',
+            "facility" => $facility
         ]);
     }
 
@@ -116,22 +134,29 @@ class FacilityController extends Controller
     {
         $credentials = $request->validate([
             'title' => ['required', 'max:255'],
-            'image' => ['image','file'],
-            'body'=>['required']
+            'image' => ['image', 'file'],
+            'body' => ['required']
         ]);
 
         $credentials['account_id'] = auth()->user()->id;
         $credentials['body'] = strip_tags($credentials['body']);
-        
-        if($request->file('image')){
-            if($facility['image']){
+
+        if ($request->file('image')) {
+            if ($facility['image']) {
                 Storage::delete($facility['image']);
             }
             $credentials['image'] = $request->file('image')->store('facility-image');
         }
 
         Facility::where('id', $facility['id'])->update($credentials);
-        return redirect('/facility/list')->with('success','The event has been updated!');
+
+        $log = new LogFacility();
+        $log->action = "Mengubah";
+        $log->id_facility = $facility->id;
+        $log->id_account = auth()->user()->id;
+        $log->save();
+
+        return redirect('/facility/list')->with('success', 'The event has been updated!');
     }
 
     /**
@@ -143,44 +168,49 @@ class FacilityController extends Controller
     public function destroy(Facility $facility)
     {
         try {
-            if($facility['image']){
-                Storage::delete($facility['image']);
-            }
-    
-            Facility::destroy($facility->id);
-            return redirect('/facility')->with('success','Facility has been deleted!');
+            $data = Facility::find($facility->id);
+            $data->delete();
+
+            $log = new LogFacility();
+            $log->action = "Menghapus";
+            $log->id_facility = $facility->id;
+            $log->id_account = auth()->user()->id;
+            $log->save();
+
+            return redirect('/facility')->with('success', 'Facility has been deleted!');
         } catch (\Throwable $th) {
             return redirect()->back()->with('fail', 'Gagal menghapus Fasilitas');
         }
-
     }
 
-    public function confirmation(Facility $facility){
+    public function confirmation(Facility $facility)
+    {
         $facility->status = "Accepted";
         $facility->message = "";
         $facility->save();
         return redirect()->back()->with('success', 'Verifikasi Fasilitas Berhasil. Fasilitas telah ditampilkan di halaman Fasilitas');
     }
 
-    public function reject(Request $request, Facility $facility){
+    public function reject(Request $request, Facility $facility)
+    {
         $facility->status = "Rejected";
         $facility->message = $request['message'];
         $facility->save();
         return redirect()->back()->with('success', 'Fasilitas Berhasil Ditolak');
     }
 
-    public function search(Request $request){
-        if($request['type'] == "superadmin"){
-            return view('facility.dashboardadmin',[
-                'title'=>'Facility',
-                "facility" => Facility::latest()->where("title","like","%".$request['search']."%")->paginate(8)
+    public function search(Request $request)
+    {
+        if ($request['type'] == "superadmin") {
+            return view('facility.dashboardadmin', [
+                'title' => 'Facility',
+                "facility" => Facility::latest()->where("title", "like", "%" . $request['search'] . "%")->paginate(8)->withQueryString()
             ]);
-        }else{
-            return view('facility.list',[
-                'title'=>'Facility',
-                'facility' => Facility::latest()->where("title","like","%".$request['search']."%")->paginate(8)
+        } else {
+            return view('facility.list', [
+                'title' => 'Facility',
+                'facility' => Facility::latest()->where('account_id', auth()->user()->id)->where("title", "like", "%" . $request['search'] . "%")->paginate(8)->withQueryString()
             ]);
         }
-
     }
 }
