@@ -17,7 +17,7 @@
         @foreach ($result as $item)
         @if ($item['format'] == "Gambar")
         <div class="card">
-          <img src="{{ asset('storage/' . $item['image']) }}" class="bd-placeholder-img">
+          <img height="300px" src="{{ asset('storage/' . $item['image']) }}" class="bd-placeholder-img">
           <div class="card-body">
             <!--
             @auth
@@ -33,9 +33,10 @@
         </div>
         @else
         <div class="card">
-          <video controls src="{{ asset('storage/'.$item['image']) }}">
+          <iframe class="bd-placeholder-img" height="300px" src="{{ url($item['image']) }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
+          <!--<video controls src="{{ asset('storage/'.$item['image']) }}">
             Your browser does not support the video tag.
-          </video>
+          </video>-->
           <div class="card-body">
             <!--
             @auth

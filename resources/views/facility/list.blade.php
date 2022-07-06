@@ -60,7 +60,7 @@
                 <form action="{{ url('/facility/delete/'.$item['id']) }}" method="post" class="d-inline">
                   @method('delete')
                   @csrf
-                  <button class="btn bg-danger" onclick="return confirm('Are you sure?')">Hapus</button>
+                  <button class="btn bg-danger" onclick="return confirm('Apakah anda ingin menghapus fasilitas ini?')">Hapus</button>
                 </form>
             </td>
           </tr>

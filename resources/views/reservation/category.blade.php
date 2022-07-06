@@ -2,17 +2,17 @@
 
 @section('container')
 <div class="container marketing">
-    <h1>Facility Editor Menu</h1>
-    <form method="post" action="/facility_reservation/create">
+    <h1>Menu Tambah Kategori Reservasi</h1>
+    <form method="post" action="{{ url('/reservation/category/create') }}">
       @csrf
       <div class="mb-3">
-        <label for="title" class="form-label">Create Facility Name</label>
+        <label for="title" class="form-label">Masukan Nama Kategori</label>
       @error('title')
             <p class="text-danger">{{ $message }}</p>
         @enderror
       <input type="text" class="form-control" id="name" name="name" autofocus value="{{ old('name') }}">
       </div>
-    <button type="submit" class="btn btn-primary">Buat Fasilitas Baru</button>
+    <button type="submit" class="btn btn-primary">Buat Kategori Baru</button>
     </form>
     <br>
 
@@ -34,7 +34,7 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($facility as $item)
+        @foreach ($category as $item)
         <tr>
             <td>{{ $loop->iteration }}</td>
             <td>{{ $item['name'] }}</td>
@@ -44,15 +44,16 @@
                 <form action="{{ url('/facility_reservation/delete/'.$item['id']) }}" method="post" class="d-inline">
                   @method('delete')
                   @csrf
-                  <button class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                  <button class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus kategori ini?')">Delete</button>
                 </form>
             </td>
             @endif
           </tr>
-        @endforeach 
+        @endforeach
+        
       </tbody>
     </table>
   </div>
-  {{ $facility->links() }}
+  {{ $category->links() }}
 </div>
 @endsection

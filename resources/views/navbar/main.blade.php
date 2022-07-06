@@ -95,7 +95,7 @@ https://templatemo.com/tm-559-zay-shop
                     <ul class="navbar-nav ms-auto">
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Menu Pegawai
+                              Menu
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                               <a class="dropdown-item" href="{{ url('/dashboardPegawai') }}">Dashboard</a>

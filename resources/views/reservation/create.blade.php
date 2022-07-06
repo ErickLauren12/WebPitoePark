@@ -70,6 +70,15 @@
         @endforeach  
       </select>
     </div>
+
+    <div class="mb-3">
+      <label for="category" class="form-label">Kategori:</label>
+      <select class="custom-select" name="category_id">
+        @foreach ($category as $item)
+          <option value="{{ $item->id }}">{{ $item->name }}</option>
+        @endforeach  
+      </select>
+    </div>
    
     <button type="submit" class="btn btn-primary">Buat Reservasi</button>
   </form>

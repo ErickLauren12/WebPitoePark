@@ -10,10 +10,16 @@
       <h1>Menu Reservasi</h1>
   
       <div style="border: 1px solid black; padding:10px">
-        <p  >Info: Jika fasilitas kosong maka buat fasilitas dulu dengan menekan tombol "Buat Fasilitas Baru"</p>
-        <a href="/facility_reservation"><button class="btn btn-primary mb-3">Buat Fasilitas Baru</button></a>
+        <p  >Info: Jika pilihan fasilitas kosong maka buat fasilitas dulu dengan menekan tombol "Buat Fasilitas Baru"</p>
+        <a href="{{ url('/facility_reservation') }}"><button class="btn btn-primary mb-3">Buat Fasilitas Baru</button></a>
         
       </div>
+
+      <div style="border: 1px solid black; padding:10px">
+        <p  >Info: Jika pilihan kategori kosong maka buat kategori dulu dengan menekan tombol "Buat Kategori Baru"</p>
+        <a href="{{ url('/reservation/category') }}"><button class="btn btn-primary mb-3">Buat Kategori Baru</button></a>   
+      </div>
+
       <div style="margin-bottom: 20px">
         <p  style="margin-top: 30px">Info: Gunakan tombol "Buat Reservasi baru" untuk membuat reservasi baru</p>
         <a href="/reservation/create"><button class="btn btn-primary">Buat Reservasi baru</button></a>
@@ -109,6 +115,7 @@
                 <th scope="col">Start Date</th>
                 <th scope="col">End Date</th>
                 <th scope="col">Fasilitas</th>
+                <th scope="col">Kategori</th>
                 <th scope="col">Aksi</th>
               </tr>
             </thead>
@@ -123,11 +130,12 @@
                   <td>{{ date('d/m/Y (H:i)', strtotime($item['start_date'])) }}</td>
                   <td>{{ date('d/m/Y (H:i)', strtotime($item['end_date'])) }}</td>
                   <td>{{ $item->facility->name }}</td>
+                  <td>{{ $item->category->name }}</td>
                   <td>
-                      <form action="/facility_reservation/delete/{{ $item['id'] }}" method="post" class="d-inline">
+                      <form action="/reservation/delete/{{ $item['id'] }}" method="post" class="d-inline">
                         @method('delete')
                         @csrf
-                        <button class="btn bg-danger" style="color: white" onclick="return confirm('Are you sure?')">Hapus</button>
+                        <button class="btn bg-danger" style="color: white" onclick="return confirm('Apakah anda yakin ingin menghapus reservasi ini?')">Hapus</button>
                       </form>
                   </td>
                 </tr>

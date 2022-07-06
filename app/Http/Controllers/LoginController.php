@@ -13,7 +13,6 @@ class LoginController extends Controller
         ]);
     }
 
-    
     public function authenticate(Request $request){
         $credentials = $request->validate([
             'username' => ['required'],
@@ -25,7 +24,7 @@ class LoginController extends Controller
             return redirect()->intended('/');
         }
 
-        return back()->with('loginError','Login Failed!');
+        return back()->with('loginError','Login Gagal Username atau Password Salah');
     }
 
     public function logout(Request $request){

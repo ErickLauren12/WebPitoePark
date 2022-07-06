@@ -31,9 +31,10 @@
                 <a href="{{ asset('storage/' . $item['image']) }}">
                 <img style="width: 300px; height:200px;" src="{{ asset('storage/' . $item['image']) }}"></a>
                 @else
-                  <video style="width: 300px; height:200px;" controls src="{{ asset('storage/'.$item['image']) }}">
+                <iframe width="400" height="200px" src="{{ url($item['image']) }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
+                  <!--<video style="width: 300px; height:200px;" controls src="{{ asset('storage/'.$item['image']) }}">
                     Your browser does not support the video tag.
-                  </video>
+                  </video>-->
                 @endif
             </td>
             <td>

@@ -16,6 +16,10 @@ class UpdateForeignkeyReservations extends Migration
         Schema::table('reservations', function (Blueprint $table) {
             $table->foreign('facility_id')->references('id')->on('reservation_facilities');
         });
+
+        Schema::table('reservations', function (Blueprint $table) {
+            $table->foreign('category_id')->references('id')->on('category_reservations');
+        });
     }
 
     /**

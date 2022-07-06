@@ -35,7 +35,7 @@
             <p class="text-danger">{{ $message }}</p>
         @enderror
         <input id="body" type="hidden" name="body" value="{{ old('body', $events->body) }}">
-        <trix-editor input="body" style="height: 200px"></trix-editor>
+        <trix-editor input="body"></trix-editor>
     </div>
    
     <button type="submit" class="btn btn-primary">Ubah Event</button>

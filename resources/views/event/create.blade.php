@@ -32,7 +32,7 @@
             <p class="text-danger">{{ $message }}</p>
         @enderror
         <input id="body" type="hidden" name="body" value="{{ old('body') }}">
-        <trix-editor input="body" class="trix-content" style="height: 200px"></trix-editor>
+        <trix-editor input="body" class="trix-content"></trix-editor>
     </div>
    
     <button type="submit" class="btn btn-primary">Buat Event</button>

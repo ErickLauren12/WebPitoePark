@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reservation extends Model
 {
     protected $fillable = [
-        'name', 'email','phone','description','start_date', 'end_date','facility_id'
+        'name', 'email','phone','description','start_date', 'end_date','facility_id', 'category_id'
     ];
 
     public function scopeFilter($query, array $filter){
@@ -30,5 +30,9 @@ class Reservation extends Model
 
     public function facility(){
         return $this->belongsTo(ReservationFacility::class);
+    }
+
+    public function category(){
+        return $this->belongsTo(CategoryReservation::class);
     }
 }

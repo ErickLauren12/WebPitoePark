@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\ReservationFacility;
+use App\CategoryReservation;
 use Illuminate\Http\Request;
 
-class ReservationFacilityController extends Controller
+class CategoryReservationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class ReservationFacilityController extends Controller
      */
     public function index()
     {
-        return view('reservation_facility.index',[
+        return view('reservation.category',[
             'title'=>'Reservation',
-            'facility' => ReservationFacility::latest()->paginate(10)->withQueryString()
+            'category' => CategoryReservation::latest()->paginate(10)->withQueryString()
         ]);
     }
 
@@ -38,22 +38,25 @@ class ReservationFacilityController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => ['required'],
-        ]);
-        
-        ReservationFacility::create($validatedData);
-        $request->session()->flash('success','reservation successfull added!');
-        return redirect('/facility_reservation');
+        try {
+            $validatedData = $request->validate([
+                'name' => ['required'],
+            ]);
+            
+            CategoryReservation::create($validatedData);
+            return redirect('/reservation/category')->with('success','Kategori Berhasil Ditambahkan');
+        } catch (\Throwable $th) {
+            return redirect('/reservation/category')->with('success','Kategori Gagal Ditambahkan');
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\ReservationFacility  $reservationFacility
+     * @param  \App\CategoryReservation  $categoryReservation
      * @return \Illuminate\Http\Response
      */
-    public function show(ReservationFacility $reservationFacility)
+    public function show(CategoryReservation $categoryReservation)
     {
         //
     }
@@ -61,10 +64,10 @@ class ReservationFacilityController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ReservationFacility  $reservationFacility
+     * @param  \App\CategoryReservation  $categoryReservation
      * @return \Illuminate\Http\Response
      */
-    public function edit(ReservationFacility $reservationFacility)
+    public function edit(CategoryReservation $categoryReservation)
     {
         //
     }
@@ -73,10 +76,10 @@ class ReservationFacilityController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ReservationFacility  $reservationFacility
+     * @param  \App\CategoryReservation  $categoryReservation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ReservationFacility $reservationFacility)
+    public function update(Request $request, CategoryReservation $categoryReservation)
     {
         //
     }
@@ -84,12 +87,11 @@ class ReservationFacilityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ReservationFacility  $reservationFacility
+     * @param  \App\CategoryReservation  $categoryReservation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ReservationFacility $reservationFacility)
+    public function destroy(CategoryReservation $categoryReservation)
     {
-        ReservationFacility::destroy($reservationFacility->id);
-        return redirect('/facility_reservation')->with('success','Reservation has been deleted!');
+        //
     }
 }

@@ -13,8 +13,30 @@
     {{ session('fail') }}
   </div>
   @endif
-  <div style="margin-bottom: 40px; padding:20px ;border: 1px solid black">
-  <form method="post" action="{{ url('/galery/upload') }}" enctype="multipart/form-data">
+
+
+  <div style="margin-bottom: 40px; margin-top: 40px; padding:20px ;border: 1px solid black">
+    <h2 style="margin-bottom: 30px">Upload Video atau Gambar</h2>
+      <select id="combo" class="form-select" aria-label="Default select example">
+        <option value="gambar">Gambar</option>
+        <option value="video">Video</option>
+      </select>
+
+      <form method="post" action="{{ url('/galery/upload') }}" enctype="multipart/form-data">
+        @csrf
+        <div id="container">
+          <img class="img-preview img-fluid mb-3 col-sm-5" alt="">
+          <div id="input" style="margin-bottom: 30px">
+            <input class="form-control" type="file" id="image" name="image" onchange="previewImage()">
+          </div>
+          <button type="submit" class="btn btn-primary">Upload</button>
+          @error('image')
+                <p class="text-danger">{{ $message }}</p>
+          @enderror
+        </div>
+      </form>
+
+<!--  <form method="post" action="{{ url('/galery/upload') }}" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
         <label for="image" class="form-label">Upload Gambar/ Video</label>
@@ -26,7 +48,10 @@
         @enderror
     </div>
     <button type="submit" class="btn btn-primary">Upload</button>
-</form>
+</form>-->
+
+
+
 </div>
     <table class="table table-striped table-sm">
       <thead>
@@ -46,9 +71,10 @@
                 <a href="{{ asset('storage/' . $item['image']) }}">
                 <img style="width: 300px; height:200px;" src="{{ asset('storage/' . $item['image']) }}"></a>
                 @else
-                  <video style="width: 300px; height:200px;" controls src="{{ asset('storage/'.$item['image']) }}">
+                <iframe width="400" height="200px" src="{{ url($item['image']) }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
+                <!--<video style="width: 300px; height:200px;" controls src="{{ asset('storage/'.$item['image']) }}">
                     Your browser does not support the video tag.
-                  </video>
+                  </video>-->
                 @endif
             </td>
             <td>
@@ -73,4 +99,25 @@
     {{ $result->links() }}
   </div>
 </div>
-  @endsection
+
+<script>
+  $("#combo").change(
+    function check() {
+    var el = document.getElementById("combo");
+    var str = el.options[el.selectedIndex].text;
+    if(str == "Video") {
+        show();
+    }else {
+        hide();
+    }
+  }
+    );
+
+function hide(){
+    $("#input").html('<input class="form-control" type="file" id="image" name="image" onchange="previewImage()">');
+}
+function show(){
+    $("#input").html('<input type="text" class="form-control" id="image" name="video" placeholder="Masukan Link Video">');
+}
+</script>
+@endsection

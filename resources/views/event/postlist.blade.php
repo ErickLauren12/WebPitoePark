@@ -60,7 +60,7 @@
               <form action="{{ url('/event/post/'.$item['id']) }}" method="post" class="d-inline">
                 @method('delete')
                 @csrf
-                <button class="btn bg-danger border-0" onclick="return confirm('Are you sure?')">Hapus</button>
+                <button class="btn bg-danger border-0" onclick="return confirm('Apakah anda yakin untuk menghapus event ini?')">Hapus</button>
               </form> 
             </td>
           </tr>

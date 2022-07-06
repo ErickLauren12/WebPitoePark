@@ -95,14 +95,14 @@
           <li style="margin-bottom: 10px" class="nav-item">
             <a class="nav-link" aria-current="page" href="{{ url("/eventlist") }}">
               <span data-feather="layers"></span>
-              Dashboard Event
+              Manajemen Event
             </a>
           </li>
               @else
               <li style="margin-bottom: 10px" class="nav-item">
                 <a class="nav-link" aria-current="page" href="{{ url("/event/dashboardadmin") }}">
                   <span data-feather="layers"></span>
-                  Dashboard Event
+                  Manajemen Event
                 </a>
               </li>
               @endif
@@ -111,14 +111,14 @@
               <li style="margin-bottom: 10px" class="nav-item">
                 <a class="nav-link" aria-current="page" href="{{ url("/cafe/dashboard") }}">
                   <span data-feather="layers"></span>
-                  Dashboard Cafe
+                  Manajemen Menu Cafe
                 </a>
               </li>
               @else
               <li style="margin-bottom: 10px" class="nav-item">
                 <a class="nav-link" aria-current="page" href="{{ url("/cafe/dashboardadmin") }}">
                   <span data-feather="layers"></span>
-                  Dashboard Cafe
+                  Manajemen Cafe
                 </a>
               </li>
               @endif
@@ -127,7 +127,7 @@
               <li style="margin-bottom: 10px" class="nav-item">
                 <a class="nav-link" aria-current="page" href="{{ url("/category") }}">
                   <span data-feather="layers"></span>
-                  Dashboard Kategori Makanan
+                  Manajemen Kategori Makanan
                 </a>
               </li>
               @endif
@@ -135,7 +135,14 @@
               <li style="margin-bottom: 10px" class="nav-item">
                 <a class="nav-link" aria-current="page" href="{{ url("/reservation") }}">
                   <span data-feather="layers"></span>
-                  Dashboard Reservasi
+                  Manajemen Reservasi
+                </a>
+              </li>
+
+              <li style="margin-bottom: 10px" class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ url("/reservation/statistics") }}">
+                  <span data-feather="layers"></span>
+                  Statistik Reservasi
                 </a>
               </li>
 
@@ -143,14 +150,14 @@
               <li style="margin-bottom: 10px" class="nav-item">
                 <a class="nav-link" aria-current="page" href="{{ url("/facility/list") }}">
                   <span data-feather="layers"></span>
-                  Dashboard Fasilitas
+                  Manajemen Fasilitas
                 </a>
               </li>  
               @else
               <li style="margin-bottom: 10px" class="nav-item">
                 <a class="nav-link" aria-current="page" href="{{ url("/facility/dashboardadmin") }}">
                   <span data-feather="layers"></span>
-                  Dashboard Fasilitas
+                  Manajemen Fasilitas
                 </a>
               </li>  
               @endif
@@ -159,7 +166,7 @@
               <li style="margin-bottom: 10px" class="nav-item">
                 <a class="nav-link" aria-current="page" href="{{ url("/galery/dashboard_pegawai") }}">
                   <span data-feather="layers"></span>
-                  Dashboard Galery
+                  Manajemen Galery
                 </a>
               </li> 
               @endif
@@ -177,13 +184,13 @@
               <li style="margin-bottom: 10px" class="nav-item">
                 <a class="nav-link" aria-current="page" href="{{ url("/galery/dashboard") }}">
                   <span data-feather="layers"></span>
-                  Dashboard Galery
+                  Manajemen Galery
                 </a>
               </li> 
               <li style="margin-bottom: 10px" class="nav-item">
                 <a class="nav-link" aria-current="page" href="{{ url("/employee") }}">
                   <span data-feather="layers"></span>
-                  Dashboard Akun Pegawai
+                  Manajemen Akun Pegawai
                 </a>
               </li>  
               @endif
@@ -202,7 +209,7 @@
           <li style="margin-bottom: 10px" class="nav-item">
             <a class="nav-link" href="{{ url('/log/cafe')}}">
               <span data-feather="file-text"></span>
-              Logs Cafe
+              Logs Menu Cafe
             </a>
           </li>
           <li style="margin-bottom: 10px" class="nav-item">

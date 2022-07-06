@@ -2,11 +2,13 @@
 
 use App\Account;
 use App\Cafe;
+use App\CategoryReservation;
 use App\Facility;
 use App\Galery;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CafeController;
 use App\Http\Controllers\CategoryFoodController;
+use App\Http\Controllers\CategoryReservationController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\GaleryController;
@@ -83,8 +85,13 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/facility_detail_dashboard/{cari}', [FacilityController::class, 'showDashboard']);
 
     Route::get('/reservation', [ReservationController::class, 'index']);
+    Route::delete('/reservation/delete/{reservation}', [ReservationController::class, 'destroy']);
+    Route::get('/reservation/statistics', [ReservationController::class, 'statistics']);
+    Route::post('/reservation/statistics/search', [ReservationController::class, 'search']);
     Route::get('/reservation/create', [ReservationController::class, 'create']);
     Route::post('/reservation/create', [ReservationController::class, 'store']);
+    Route::get('/reservation/category', [CategoryReservationController::class, 'index']);
+    Route::post('/reservation/category/create', [CategoryReservationController::class, 'store']);
 
     Route::get('/employee/edit', [AccountController::class, 'indexEmployee']);
     Route::post('/employee/editStore', [AccountController::class, 'updatePassword']);
@@ -100,7 +107,6 @@ Route::group(['middleware' => 'is_super_admin'], function () {
     
     Route::get('/galery/dashboard', [GaleryController::class, 'dashboard']);
     Route::get('/galery/confirmation/{galery}', [GaleryController::class, 'confirmation']);
-    Route::delete('/galery/delete/{galery}', [GaleryController::class, 'deletedashboard']);
     
     Route::delete('/employee/delete/{account}', [AccountController::class, 'destroy']);
     Route::get('/employee/search', [AccountController::class, 'search']);

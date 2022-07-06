@@ -56,22 +56,25 @@ class GaleryController extends Controller
      */
     public function store(Request $request)
     {
-        $credentials = $request->validate([
-            'image' => ['required']
-        ]);
-
-        if ($request->file('image')) {
-            $credentials['image'] = $request->file('image')->store('galery');
-        }
-
         $credentials['account_id'] = auth()->user()->id;
-        $fileFormat = $request->file('image')->getClientOriginalExtension();
-
+        //$fileFormat = $request->file('image')->getClientOriginalExtension();
+        
+        if($request->filled('video')) {
+            $credentials['image'] = $request['video'];
+            $credentials['format'] = "Video";
+        }else{
+            if ($request->file('image')) {
+                $credentials['image'] = $request->file('image')->store('galery');
+            }
+            $credentials['format'] = "Gambar";
+        }
+        
+        /*
         if ($fileFormat == "mp4" || $fileFormat == "flv" || $fileFormat == "m3u8" || $fileFormat == "ts" || $fileFormat == "3gp" || $fileFormat == "mov" || $fileFormat == "avi" || $fileFormat == "wmv") {
             $credentials['format'] = "Video";
         } else {
             $credentials['format'] = "Gambar";
-        }
+        }*/
 
         $result = Galery::create($credentials);
 
@@ -81,7 +84,7 @@ class GaleryController extends Controller
         $log->id_account = auth()->user()->id;
         $log->save();
 
-        return redirect('/galery/dashboard_pegawai')->with('success', 'Gambar/ video Berhasil di Upload, Gambar/ video  akan diproses verifikasi');
+        return redirect()->back()->with('success', 'Gambar/ video Berhasil di Upload, Gambar/ video  akan diproses verifikasi');
     }
 
     /**
@@ -137,7 +140,7 @@ class GaleryController extends Controller
             $log->id_account = auth()->user()->id;
             $log->save();
 
-            return redirect('/galery');
+            return redirect()->back()->with('success', 'Berhasil menghapus Gambar/ video');
         } catch (\Throwable $th) {
             return redirect()->back()->with('fail', 'Gagal menghapus Gambar/ video');
         }

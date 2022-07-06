@@ -22,6 +22,7 @@ class CreateReservationsTable extends Migration
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->unsignedBigInteger('facility_id');
+            $table->unsignedBigInteger('category_id');
             $table->timestamps();
         });
     }
