@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\NewsExport;
 use App\LogNews;
 use App\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class NewsController extends Controller
 {
@@ -16,6 +19,31 @@ class NewsController extends Controller
             'title' => 'Event',
             "events" => News::latest()->where('status', '=', 'Accepted')->paginate(8)
         ]);
+    }
+
+    public function exportData()
+    {
+        return view('extract.news', [
+            "post" => News::all()
+        ]);
+        
+        //return News::all();
+    }
+
+    public function extractData(Request $request){
+        if($request['number'] === "1"){
+            return Excel::download(new NewsExport,"DataEvent.xlsx");
+        }else if($request['number'] === "2"){
+            return Excel::download(new NewsExport,"DataEvent.csv");
+        }else{
+            //return Excel::download(new NewsExport,"DataEvent.pdf");
+
+            $data = News::all();
+            view()->share("post",$data);
+            $pdf = \PDF::loadView('extract.news');
+            return $pdf->download("DataEvent.pdf");
+        }
+        
     }
 
     public function listDataAdmin()

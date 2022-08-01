@@ -6,6 +6,8 @@ use App\Facility;
 use App\LogFacility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Exports\FacilityExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FacilityController extends Controller
 {
@@ -20,6 +22,31 @@ class FacilityController extends Controller
             'title' => 'Facility',
             "facility" => Facility::latest()->where('status', '=', 'Accepted')->paginate(6)
         ]);
+    }
+
+    public function exportData()
+    {
+        return view('extract.facility', [
+            "facility" => Facility::all()
+        ]);
+        
+        //return News::all();
+    }
+
+    public function extractData(Request $request){
+        if($request['number'] === "1"){
+            return Excel::download(new FacilityExport,"DataFacility.xlsx");
+        }else if($request['number'] === "2"){
+            return Excel::download(new FacilityExport,"DataFacility.csv");
+        }else{
+            //return Excel::download(new NewsExport,"DataEvent.pdf");
+
+            $data = Facility::all();
+            view()->share("facility",$data);
+            $pdf = \PDF::loadView('extract.facility');
+            return $pdf->download("DataEvent.pdf");
+        }
+        
     }
 
     public function indexDashBoardAdmin()

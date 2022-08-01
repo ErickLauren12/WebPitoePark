@@ -9,6 +9,8 @@ use App\ReservationFacility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ReservasiExport;
 
 class ReservationController extends Controller
 {
@@ -24,6 +26,31 @@ class ReservationController extends Controller
             'reservation_facility' => ReservationFacility::all(),
             'reservation' => Reservation::orderBy('start_date', 'DESC')->filter(request(['name', 'startDate', 'endDate', 'facility_id']))->paginate(10)->withQueryString()
         ]);
+    }
+
+    public function extractData(Request $request){
+        if($request['number'] === "1"){
+            return Excel::download(new ReservasiExport,"DataReservation.xlsx");
+        }else if($request['number'] === "2"){
+            return Excel::download(new ReservasiExport,"DataReservationt.csv");
+        }else{
+            //return Excel::download(new NewsExport,"DataEvent.pdf");
+
+            $data = Reservation::all();
+            view()->share("reservation",$data);
+            $pdf = \PDF::loadView('extract.reservasi');
+            return $pdf->download("DataReservation.pdf");
+        }
+        
+    }
+
+    public function exportData()
+    {
+        return view('extract.reservasi', [
+            "reservation" => Reservation::all()
+        ]);
+        
+        //return News::all();
     }
 
     public function statistics()

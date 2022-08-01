@@ -56,6 +56,8 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::delete('/event/post/{news}', [NewsController::class, 'destroy']);
     Route::get('/event/search', [NewsController::class, 'search']);
     Route::get('/detail_dashboard/{cari}', [NewsController::class, 'showDashboard']);
+    Route::get('event/extract/{number}',[NewsController::class, 'extractData']);
+    Route::get('event/extract',[NewsController::class, 'exportData']);
 
     Route::get('/galery/dashboard_pegawai', [GaleryController::class, 'dashboardPegawai']);
     Route::post('/galery/upload', [GaleryController::class, 'store']);
@@ -83,6 +85,8 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/facility_reservation', [ReservationFacilityController::class, 'index']);
     Route::get('/facility/search', [FacilityController::class, 'search']);
     Route::get('/facility_detail_dashboard/{cari}', [FacilityController::class, 'showDashboard']);
+    Route::get('facility/extract/{number}',[FacilityController::class, 'extractData']);
+    Route::get('facility/extract',[FacilityController::class, 'exportData']);
 
     Route::get('/reservation', [ReservationController::class, 'index']);
     Route::delete('/reservation/delete/{reservation}', [ReservationController::class, 'destroy']);
@@ -92,6 +96,8 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::post('/reservation/create', [ReservationController::class, 'store']);
     Route::get('/reservation/category', [CategoryReservationController::class, 'index']);
     Route::post('/reservation/category/create', [CategoryReservationController::class, 'store']);
+    Route::get('reservation/extract/{number}',[ReservationController::class, 'extractData']);
+    Route::get('reservation/extract',[ReservationController::class, 'exportData']);
 
     Route::get('/employee/edit', [AccountController::class, 'indexEmployee']);
     Route::post('/employee/editStore', [AccountController::class, 'updatePassword']);
