@@ -28,15 +28,14 @@
     </div>
     <div class="container">
         <h1>Data Statistik Pemesanan Fasilitas</h1>
-        <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+        <div style="width: 100%" id="columnchart_material"></div>
     </div>
 
     <div class="container">
         <h1>Data Statistik Pemesanan Kategori</h1>
-        <div id="columnchart_material2" style="width: 800px; height: 500px;"></div>
+        <div style="width: 100%" id="columnchart_material2"></div>
     </div>
     </div>
-</div>
 </div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
