@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CategoryReservation;
-use App\reservation;
+use App\Reservation;
 use App\Reservation as AppReservation;
 use App\ReservationFacility;
 use Illuminate\Http\Request;
