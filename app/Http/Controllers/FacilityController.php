@@ -108,7 +108,12 @@ class FacilityController extends Controller
         ]);
 
         if ($request->file('image')) {
-            $credentials['image'] = $request->file('image')->store('facility-image');
+            $file = $request->file('image');
+            $imgFolder = 'images/Facility';
+            $imgFile = time() . "_" . $file->getClientOriginalName();
+            $file->move($imgFolder, $imgFile);
+            $credentials['image'] = 'images/Facility/'.$imgFile;
+            //$credentials['image'] = $request->file('image')->store('facility-image');
         }
 
         $credentials['account_id'] = auth()->user()->id;
@@ -170,9 +175,16 @@ class FacilityController extends Controller
 
         if ($request->file('image')) {
             if ($facility['image']) {
-                Storage::delete($facility['image']);
+                //Storage::delete($facility['image']);
+                unlink($facility['image']);
             }
-            $credentials['image'] = $request->file('image')->store('facility-image');
+            $file = $request->file('image');
+            $imgFolder = 'images/Facility';
+            $imgFile = time() . "_" . $file->getClientOriginalName();
+            $file->move($imgFolder, $imgFile);
+            $credentials['image'] = 'images/Facility/'.$imgFile;
+
+            //$credentials['image'] = $request->file('image')->store('facility-image');
         }
 
         Facility::where('id', $facility['id'])->update($credentials);

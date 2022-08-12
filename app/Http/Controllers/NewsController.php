@@ -70,10 +70,6 @@ class NewsController extends Controller
             'body' => ['required']
         ]);
 
-        if ($request->file('image')) {
-            $credentials['image'] = $request->file('image')->store('news-image');
-        }
-
         $credentials['account_id'] = auth()->user()->id;
         $credentials['excerpt'] = Str::limit(strip_tags($request['body']), 100, "...");
         $credentials['body'] = $credentials['body'];
@@ -83,7 +79,18 @@ class NewsController extends Controller
         $news->account_id = $credentials['account_id'];
         $news->excerpt = $credentials['excerpt'];
         $news->body = $credentials['body'];
-        $news->image = $credentials['image'];
+        
+
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            $imgFolder = 'images/News';
+            $imgFile = time() . "_" . $file->getClientOriginalName();
+            $file->move($imgFolder, $imgFile);
+
+            $news->image = 'images/News/'.$imgFile;
+            //$credentials['image'] = $request->file('image')->store('news-image');
+        }
+
         $news->save();
 
         $log = new LogNews();
@@ -160,9 +167,14 @@ class NewsController extends Controller
 
         if ($request->file('image')) {
             if ($news['image']) {
-                Storage::delete($news['image']);
+                //Storage::delete($news['image']);
+                unlink($news['image']);
             }
-            $credentials['image'] = $request->file('image')->store('news-image');
+            
+            $file = $request->file('image');
+            $imgFolder = 'images/News';
+            $imgFile = time() . "_" . $file->getClientOriginalName();
+            $file->move($imgFolder, $imgFile);
         }
 
         News::where('id', $news['id'])->update($credentials);

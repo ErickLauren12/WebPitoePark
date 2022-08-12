@@ -9,7 +9,7 @@
     @foreach ($events as $item)
     <div class="card ml-3 mb-3 mt-3" style="width: 18rem;">
       <h5 class="card-title mb-3 mt-3" style="font-weight: bold">{{ $item['title'] }}</h5>
-      <img width="300px" height="200px" src="{{ asset('storage/'. $item['image']) }}" class="card-img-top" alt="img">
+      <img width="300px" height="200px" src="{{ asset( $item['image']) }}" class="card-img-top" alt="img">
       <div class="card-body">
         <p class="card-text">{{ $item['excerpt'] }}</p>
       </div>

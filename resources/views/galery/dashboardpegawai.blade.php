@@ -68,8 +68,8 @@
             <td>{{ $loop->iteration }}</td>
             <td style="text-align: center; padding:10px">
                 @if ($item['format'] == "Gambar")
-                <a href="{{ asset('storage/' . $item['image']) }}">
-                <img style="width: 300px; height:200px;" src="{{ asset('storage/' . $item['image']) }}"></a>
+                <a href="{{ asset( $item['image']) }}">
+                <img style="width: 300px; height:200px;" src="{{ asset( $item['image']) }}"></a>
                 @else
                 <iframe width="400" height="200px" src="{{ url($item['image']) }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
                 <!--<video style="width: 300px; height:200px;" controls src="{{ asset('storage/'.$item['image']) }}">
