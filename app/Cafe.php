@@ -27,7 +27,7 @@ class Cafe extends Model
     public function account(){
         return $this->belongsTo(Account::class);
     }
-    
+
     public function category(){
         return $this->belongsTo(CategoryFood::class);
     }
@@ -35,4 +35,6 @@ class Cafe extends Model
     public function log_cafe(){
         return $this->hasMany(LogCafe::class);
     }
+
+
 }
