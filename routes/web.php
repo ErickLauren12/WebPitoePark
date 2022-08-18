@@ -130,16 +130,16 @@ Route::group(['middleware' => 'is_super_admin'], function () {
     Route::post('/facility/dashboardadmin/reject/{facility}', [FacilityController::class, 'reject']);
 
     Route::get('/log/event', [LogNewsController::class, 'index']);
-    Route::get('/log/event/search', [LogNewsController::class, 'find']);
+    Route::post('/log/event/search', [LogNewsController::class, 'find']);
 
     Route::get('/log/cafe', [LogCafeController::class, 'index']);
-    Route::get('/log/cafe/search', [LogCafeController::class, 'find']);
+    Route::post('/log/cafe/search', [LogCafeController::class, 'find']);
 
     Route::get('/log/galery', [LogGalerieController::class, 'index']);
-    Route::get('/log/galery/search', [LogGalerieController::class, 'find']);
+    Route::post('/log/galery/search', [LogGalerieController::class, 'find']);
 
     Route::get('/log/facility', [LogFacilityController::class, 'index']);
-    Route::get('/log/facility/search', [LogFacilityController::class, 'find']);
+    Route::post('/log/facility/search', [LogFacilityController::class, 'find']);
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');

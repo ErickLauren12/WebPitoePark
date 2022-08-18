@@ -156,6 +156,23 @@ https://templatemo.com/tm-559-zay-shop
                             <i class="fa fa-envelope fa-fw"></i>
                             <a class="text-decoration-none" href="mailto:kendhipitoepark.kelola@gmail.com">kendhipitoepark.kelola@gmail.com</a>
                         </li>
+                        <li>
+                            <div class="col-auto me-auto">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item">
+                                       <img style="width: 90px; height: 90px" src="images/dikti.png" alt="">
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <img style="width: 90px; height: 70px" src="images/kampus.png" alt="">
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <img style="width: 90px; height: 90px" src="images/ubaya.png" alt="">
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+
                     </ul>
                 </div>
 
