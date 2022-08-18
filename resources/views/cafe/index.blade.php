@@ -9,7 +9,7 @@
     {{ session('success') }}
   </div>
   @endif
-  
+
   <div class="container py-5">
     <div class="row">
         <div class="col-lg-3">
@@ -22,11 +22,11 @@
                     </a>
                     <ul class="collapse show list-unstyled pl-3">
                       <form action="{{ url('/cafe') }}">
-                        <div class="input-group mb-3"> 
+                        <div class="input-group mb-3">
                             <input type="text" class="form-control" placeholder="Masukan Nama Menu" name="search" value="{{ request('search') }}">
                             <div class="input-group-append">
                               <button class="btn btn-danger" type="submit">Cari</button>
-                            </div>  
+                            </div>
                         </div>
                     </form>
                     </ul>
@@ -47,7 +47,7 @@
                                 <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
                               @else
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
-                              @endif 
+                              @endif
                             @endforeach
                           </select>
                           <button type="submit" class="btn btn-primary">Cari</button>
@@ -64,7 +64,7 @@
               <div class="col-md-4">
                 <div class="card mb-4 product-wap rounded-0">
                     <div class="card rounded-0">
-                        <img class="card-img rounded-0" height="170px" src="{{ asset('storage/' . $item['image']) }}">
+                        <img class="card-img rounded-0" height="170px" src="{{ asset('assets/img/' . $item['image']) }}">
                     </div>
                     <div class="card-body">
                         <span class="badge badge-primary">{{ $item->category->name }}</span><br>
@@ -82,7 +82,7 @@
         </div>
 
     </div>
-</div> 
+</div>
 </div>
 </div>
 @endsection
