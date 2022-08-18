@@ -64,7 +64,12 @@ class GaleryController extends Controller
             $credentials['format'] = "Video";
         }else{
             if ($request->file('image')) {
-                $credentials['image'] = $request->file('image')->store('galery');
+                $file = $request->file('image');
+                $imgFolder = 'images/Galery';
+                $imgFile = time() . "_" . $file->getClientOriginalName();
+                $file->move($imgFolder, $imgFile);
+                $credentials['image'] = 'images/Galery/'.$imgFile;
+                //$credentials['image'] = $request->file('image')->store('galery');
             }
             $credentials['format'] = "Gambar";
         }

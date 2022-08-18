@@ -15,6 +15,7 @@ use App\Http\Controllers\GaleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Location;
 use App\Http\Controllers\LogCafeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\LogFacilityController;
 use App\Http\Controllers\LogGalerieController;
@@ -56,6 +57,8 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::delete('/event/post/{news}', [NewsController::class, 'destroy']);
     Route::get('/event/search', [NewsController::class, 'search']);
     Route::get('/detail_dashboard/{cari}', [NewsController::class, 'showDashboard']);
+    Route::get('event/extract/{number}',[NewsController::class, 'extractData']);
+    Route::get('event/extract',[NewsController::class, 'exportData']);
 
     Route::get('/galery/dashboard_pegawai', [GaleryController::class, 'dashboardPegawai']);
     Route::post('/galery/upload', [GaleryController::class, 'store']);
@@ -67,7 +70,16 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/cafe/{cafe}/edit', [CafeController::class, 'edit']);
     Route::put('/cafe/edit/{cafe}', [CafeController::class, 'update']);
     Route::get('/cafe/dashboard', [CafeController::class, 'indexDashBoard']);
+    Route::get('/cafe/dashboard/process', [CafeController::class, 'indexProcessOrder'])->name('order.pesanan.process');
+    Route::get('/cafe/dashboard/done', [CafeController::class, 'indexDoneOrder'])->name('order.pesanan.selesai');
+    Route::get('/cafe/order/pesanan', [CafeController::class, 'order'])->name('order.pesanan.cafe');
+    Route::get('/cafe/order/done/{id}', [CafeController::class, 'done'])->name('order.done.cafe');
+
+    Route::post('/cafe/order/pesanan', [CafeController::class, 'processOrder'])->name('order.pesanan.processOrder');
+    Route::get('/cafe/order/pesanan/getdata', [CafeController::class, 'getData'])->name('order.pesanan.cafe.getdata');
     Route::get('/cafe/search', [CafeController::class, 'search']);
+    Route::get('cafe/extract/{number}',[CafeController::class, 'extractData']);
+    Route::get('cafe/extract',[CafeController::class, 'exportData']);
 
     Route::post('/category/create', [CategoryFoodController::class, 'store']);
     Route::delete('/category/delete/{categoryFood}', [CategoryFoodController::class, 'destroy']);
@@ -83,6 +95,12 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/facility_reservation', [ReservationFacilityController::class, 'index']);
     Route::get('/facility/search', [FacilityController::class, 'search']);
     Route::get('/facility_detail_dashboard/{cari}', [FacilityController::class, 'showDashboard']);
+    Route::get('facility/extract/{number}',[FacilityController::class, 'extractData']);
+    Route::get('facility/extract',[FacilityController::class, 'exportData']);
+
+    Route::get('/qrcode', 'MejaController@index')->name('meja.index');
+            Route::post('/qrcode', 'MejaController@store')->name('meja.store');
+            Route::get('qrcode/{id}', 'MejaController@generate')->name('meja.generate');
 
     Route::get('/reservation', [ReservationController::class, 'index']);
     Route::delete('/reservation/delete/{reservation}', [ReservationController::class, 'destroy']);
@@ -92,6 +110,8 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::post('/reservation/create', [ReservationController::class, 'store']);
     Route::get('/reservation/category', [CategoryReservationController::class, 'index']);
     Route::post('/reservation/category/create', [CategoryReservationController::class, 'store']);
+    Route::get('reservation/extract/{number}',[ReservationController::class, 'extractData']);
+    Route::get('reservation/extract',[ReservationController::class, 'exportData']);
 
     Route::get('/employee/edit', [AccountController::class, 'indexEmployee']);
     Route::post('/employee/editStore', [AccountController::class, 'updatePassword']);
@@ -149,6 +169,13 @@ Route::get('/galery', [GaleryController::class, 'index']);
 Route::get('/location', [Location::class, 'index']);
 
 Route::get('/cafe', [CafeController::class, 'index']);
+
+Route::get('/order', [OrderController::class, 'index']);
+Route::get('/order/{id}', [OrderController::class, 'detail'])->name('order.detail');
+Route::post('/order/{id}', [OrderController::class, 'store'])->name('order.store');
+Route::get('/delete/{id}', [OrderController::class, 'delete'])->name('order.delete.cafe');
+
+Route::post('/process', [OrderController::class, 'process'])->name('order.process');
 
 Route::get('/category', [CategoryFoodController::class, 'index']);
 

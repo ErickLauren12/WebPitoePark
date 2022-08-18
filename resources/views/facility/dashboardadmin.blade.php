@@ -26,6 +26,12 @@
     {{ session('fail') }}
   </div>
   @endif
+  <div style="margin: 30px">
+    <p>Donwload</p>
+    <a href="{{ url('facility/extract/1') }}" class="btn btn-info">Excle</a>
+    <a href="{{ url('facility/extract/2') }}" class="btn btn-info">CSV</a>
+    <a href="{{ url('facility/extract/3') }}" class="btn btn-info">PDF</a>
+  </div>
     <table class="table table-striped table-sm">
       <thead>
         <tr>

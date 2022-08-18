@@ -66,8 +66,8 @@
   <div class="navbar-nav">
     <div class="nav-item text-nowrap" style="margin: 10px">
       @auth
-      <span style="margin-right: 20px">Username: {{ auth()->user()->username }}
-      @if (auth()->user()->is_admin === 1)
+      <span style="margin-right: 20px">Username: {{ auth()->user()->username }} 
+      @if (auth()->user()->is_admin == 1)
           [Pegawai]
       @else
       [Manager]
@@ -91,43 +91,113 @@
           <span>Menu Dashboard</span>
         </h6>
         <ul class="nav flex-column">
-          @if (auth()->user()->is_admin === 1)
+          @if (auth()->user()->is_admin < 2)
           <li style="margin-bottom: 10px" class="nav-item">
             <a class="nav-link" aria-current="page" href="{{ url("/eventlist") }}">
               <span data-feather="layers"></span>
               Manajemen Event
             </a>
           </li>
+          <li style="margin-bottom: 10px" class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ url("/qrcode") }}">
+                  <span data-feather="layers"></span>
+                  Manajemen Meja
+                </a>
+              </li>
+          <li style="margin-bottom: 10px" class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ url("/cafe/dashboard") }}">
+                  <span data-feather="layers"></span>
+                  Manajemen Menu Cafe
+                </a>
+          </li>
+
+              @if (auth()->user()->is_admin === 1)
+              <li style="margin-bottom: 10px" class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ url("/reservation") }}">
+                  <span data-feather="layers"></span>
+                  Manajemen Reservasi
+                </a>
+              </li>
               @else
+              <li style="margin-bottom: 10px" class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ url("/reservation/statistics") }}">
+                  <span data-feather="layers"></span>
+                  Statistik Reservasi
+                </a>
+              </li>
+              @endif
+              
+
+          <li style="margin-bottom: 10px" class="nav-item">
+            <a class="nav-link" aria-current="page" href="{{ url("/category") }}">
+              <span data-feather="layers"></span>
+              Manajemen Kategori Makanan
+            </a>
+          </li>
+
+          <li style="margin-bottom: 10px" class="nav-item">
+            <a class="nav-link" aria-current="page" href="{{ url("/facility/list") }}">
+              <span data-feather="layers"></span>
+              Manajemen Fasilitas
+            </a>
+          </li>  
+
+          <li style="margin-bottom: 10px" class="nav-item">
+            <a class="nav-link" aria-current="page" href="{{ url("/galery/dashboard_pegawai") }}">
+              <span data-feather="layers"></span>
+              Manajemen Galery
+            </a>
+          </li> 
+
+          <li style="margin-bottom: 10px" class="nav-item">
+            <a class="nav-link" aria-current="page" href="{{ url("/employee/edit") }}">
+              <span data-feather="layers"></span>
+              Ubah Akun
+            </a>
+          </li> 
+          
+
+              @else
+          
+          
+          
               <li style="margin-bottom: 10px" class="nav-item">
                 <a class="nav-link" aria-current="page" href="{{ url("/event/dashboardadmin") }}">
                   <span data-feather="layers"></span>
                   Manajemen Event
                 </a>
               </li>
-              @endif
 
-              @if (auth()->user()->is_admin === 1)
-              <li style="margin-bottom: 10px" class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{ url("/cafe/dashboard") }}">
-                  <span data-feather="layers"></span>
-                  Manajemen Menu Cafe
-                </a>
-              </li>
-              @else
               <li style="margin-bottom: 10px" class="nav-item">
                 <a class="nav-link" aria-current="page" href="{{ url("/cafe/dashboardadmin") }}">
                   <span data-feather="layers"></span>
                   Manajemen Cafe
                 </a>
               </li>
-              @endif
 
-              @if (auth()->user()->is_admin === 1)
               <li style="margin-bottom: 10px" class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{ url("/category") }}">
+                <a class="nav-link" aria-current="page" href="{{ url("/facility/dashboardadmin") }}">
                   <span data-feather="layers"></span>
-                  Manajemen Kategori Makanan
+                  Manajemen Fasilitas
+                </a>
+              </li>
+
+              <li style="margin-bottom: 10px" class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ url("/galery/dashboard") }}">
+                  <span data-feather="layers"></span>
+                  Manajemen Galery
+                </a>
+              </li> 
+              <li style="margin-bottom: 10px" class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ url("/employee") }}">
+                  <span data-feather="layers"></span>
+                  Manajemen Akun Pegawai
+                </a>
+              </li> 
+              <li style="margin-bottom: 10px" class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ url("/qrcode") }}">
+                  <span data-feather="layers"></span>
+                  Manajemen Meja
                 </a>
               </li>
               @endif
@@ -145,57 +215,10 @@
                   Statistik Reservasi
                 </a>
               </li>
-
-              @if (auth()->user()->is_admin === 1)
-              <li style="margin-bottom: 10px" class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{ url("/facility/list") }}">
-                  <span data-feather="layers"></span>
-                  Manajemen Fasilitas
-                </a>
-              </li>  
-              @else
-              <li style="margin-bottom: 10px" class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{ url("/facility/dashboardadmin") }}">
-                  <span data-feather="layers"></span>
-                  Manajemen Fasilitas
-                </a>
-              </li>  
-              @endif
-
-              @if (auth()->user()->is_admin === 1)
-              <li style="margin-bottom: 10px" class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{ url("/galery/dashboard_pegawai") }}">
-                  <span data-feather="layers"></span>
-                  Manajemen Galery
-                </a>
-              </li> 
-              @endif
-
-              @if (auth()->user()->is_admin === 1)
-              <li style="margin-bottom: 10px" class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{ url("/employee/edit") }}">
-                  <span data-feather="layers"></span>
-                  Ubah Akun
-                </a>
-              </li> 
-              @endif
-
-              @if (auth()->user()->is_admin === 2)
-              <li style="margin-bottom: 10px" class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{ url("/galery/dashboard") }}">
-                  <span data-feather="layers"></span>
-                  Manajemen Galery
-                </a>
-              </li> 
-              <li style="margin-bottom: 10px" class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{ url("/employee") }}">
-                  <span data-feather="layers"></span>
-                  Manajemen Akun Pegawai
-                </a>
-              </li>  
-              @endif
         </ul>
-        @if (auth()->user()->is_admin === 2)
+
+
+        @if (auth()->user()->is_admin > 1)
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
           <span>Menu Logs</span>
         </h6>

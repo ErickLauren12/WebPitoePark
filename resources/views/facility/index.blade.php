@@ -8,7 +8,7 @@
         <div class="col">
           <a href="/facilty/detail/{{ $item['id'] }}">
             <div class="card shadow-sm">
-              <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{ asset('storage/' . $item['image']) }}">
+              <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{ asset( $item['image']) }}">
               <div class="card-body">
                 <h5 class="card-title">{{ $item['title'] }}</h5>
               </div>

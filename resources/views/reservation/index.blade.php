@@ -103,6 +103,12 @@
 
       <br>
       <h1>Daftar Reservasi</h1>
+      <div style="margin: 30px">
+        <p>Donwload</p>
+        <a href="{{ url('reservation/extract/1') }}" class="btn btn-info">Excle</a>
+        <a href="{{ url('reservation/extract/2') }}" class="btn btn-info">CSV</a>
+        <a href="{{ url('reservation/extract/3') }}" class="btn btn-info">PDF</a>
+      </div>
       <div class="table-responsive">
           <table class="table table-striped table-sm">
             <thead>

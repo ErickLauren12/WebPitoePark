@@ -6,6 +6,8 @@ use App\Facility;
 use App\LogFacility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Exports\FacilityExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FacilityController extends Controller
 {
@@ -20,6 +22,31 @@ class FacilityController extends Controller
             'title' => 'Facility',
             "facility" => Facility::latest()->where('status', '=', 'Accepted')->paginate(6)
         ]);
+    }
+
+    public function exportData()
+    {
+        return view('extract.facility', [
+            "facility" => Facility::all()
+        ]);
+        
+        //return News::all();
+    }
+
+    public function extractData(Request $request){
+        if($request['number'] === "1"){
+            return Excel::download(new FacilityExport,"DataFacility.xlsx");
+        }else if($request['number'] === "2"){
+            return Excel::download(new FacilityExport,"DataFacility.csv");
+        }else{
+            //return Excel::download(new NewsExport,"DataEvent.pdf");
+
+            $data = Facility::all();
+            view()->share("facility",$data);
+            $pdf = \PDF::loadView('extract.facility');
+            return $pdf->download("DataEvent.pdf");
+        }
+        
     }
 
     public function indexDashBoardAdmin()
@@ -81,7 +108,12 @@ class FacilityController extends Controller
         ]);
 
         if ($request->file('image')) {
-            $credentials['image'] = $request->file('image')->store('facility-image');
+            $file = $request->file('image');
+            $imgFolder = 'images/Facility';
+            $imgFile = time() . "_" . $file->getClientOriginalName();
+            $file->move($imgFolder, $imgFile);
+            $credentials['image'] = 'images/Facility/'.$imgFile;
+            //$credentials['image'] = $request->file('image')->store('facility-image');
         }
 
         $credentials['account_id'] = auth()->user()->id;
@@ -143,9 +175,16 @@ class FacilityController extends Controller
 
         if ($request->file('image')) {
             if ($facility['image']) {
-                Storage::delete($facility['image']);
+                //Storage::delete($facility['image']);
+                unlink($facility['image']);
             }
-            $credentials['image'] = $request->file('image')->store('facility-image');
+            $file = $request->file('image');
+            $imgFolder = 'images/Facility';
+            $imgFile = time() . "_" . $file->getClientOriginalName();
+            $file->move($imgFolder, $imgFile);
+            $credentials['image'] = 'images/Facility/'.$imgFile;
+
+            //$credentials['image'] = $request->file('image')->store('facility-image');
         }
 
         Facility::where('id', $facility['id'])->update($credentials);

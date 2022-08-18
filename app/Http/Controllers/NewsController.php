@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\NewsExport;
 use App\LogNews;
 use App\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class NewsController extends Controller
 {
@@ -16,6 +19,31 @@ class NewsController extends Controller
             'title' => 'Event',
             "events" => News::latest()->where('status', '=', 'Accepted')->paginate(8)
         ]);
+    }
+
+    public function exportData()
+    {
+        return view('extract.news', [
+            "post" => News::all()
+        ]);
+        
+        //return News::all();
+    }
+
+    public function extractData(Request $request){
+        if($request['number'] === "1"){
+            return Excel::download(new NewsExport,"DataEvent.xlsx");
+        }else if($request['number'] === "2"){
+            return Excel::download(new NewsExport,"DataEvent.csv");
+        }else{
+            //return Excel::download(new NewsExport,"DataEvent.pdf");
+
+            $data = News::all();
+            view()->share("post",$data);
+            $pdf = \PDF::loadView('extract.news');
+            return $pdf->download("DataEvent.pdf");
+        }
+        
     }
 
     public function listDataAdmin()
@@ -42,10 +70,6 @@ class NewsController extends Controller
             'body' => ['required']
         ]);
 
-        if ($request->file('image')) {
-            $credentials['image'] = $request->file('image')->store('news-image');
-        }
-
         $credentials['account_id'] = auth()->user()->id;
         $credentials['excerpt'] = Str::limit(strip_tags($request['body']), 100, "...");
         $credentials['body'] = $credentials['body'];
@@ -55,7 +79,18 @@ class NewsController extends Controller
         $news->account_id = $credentials['account_id'];
         $news->excerpt = $credentials['excerpt'];
         $news->body = $credentials['body'];
-        $news->image = $credentials['image'];
+        
+
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            $imgFolder = 'images/News';
+            $imgFile = time() . "_" . $file->getClientOriginalName();
+            $file->move($imgFolder, $imgFile);
+
+            $news->image = 'images/News/'.$imgFile;
+            //$credentials['image'] = $request->file('image')->store('news-image');
+        }
+
         $news->save();
 
         $log = new LogNews();
@@ -132,9 +167,14 @@ class NewsController extends Controller
 
         if ($request->file('image')) {
             if ($news['image']) {
-                Storage::delete($news['image']);
+                //Storage::delete($news['image']);
+                unlink($news['image']);
             }
-            $credentials['image'] = $request->file('image')->store('news-image');
+            
+            $file = $request->file('image');
+            $imgFolder = 'images/News';
+            $imgFile = time() . "_" . $file->getClientOriginalName();
+            $file->move($imgFolder, $imgFile);
         }
 
         News::where('id', $news['id'])->update($credentials);

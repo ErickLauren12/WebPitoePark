@@ -19,7 +19,7 @@
     <div class="mb-3">
       <label for="image" class="form-label">Upload Gambar</label>
       @if ($facility->image)
-        <img src="{{ asset('storage/' . $facility->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block" alt="">
+        <img src="{{ asset( $facility->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block" alt="">
       @else
         <img class="img-preview img-fluid mb-3 col-sm-5 d-block" alt="">
       @endif          

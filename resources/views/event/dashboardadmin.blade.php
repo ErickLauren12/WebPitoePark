@@ -15,6 +15,12 @@
       </div>
   </form>
   </div>
+  <div style="margin: 30px">
+    <p>Donwload</p>
+    <a href="{{ url('event/extract/1') }}" class="btn btn-info">Excle</a>
+    <a href="{{ url('event/extract/2') }}" class="btn btn-info">CSV</a>
+    <a href="{{ url('event/extract/3') }}" class="btn btn-info">PDF</a>
+  </div>
 <div class="table-responsive">
   @if (session()->has('success'))
   <div class="alert alert-success p-3 mb-2 bg-success text-white" role="alert">
@@ -90,7 +96,7 @@
                 </div>
               </div>
               @else
-              <a href="/detail_dashboard/{{ $item['id'] }}" class="btn bg-info text-white">Detail</a>
+              <a href="/detail_dashboard/{{ $item['id'] }}" class="btn btn-sm bg-info text-white">Detail</a>
               <a href="/event/dashboardadmin/confirmation/{{ $item['id'] }}" class="btn btn-sm bg-success" style="color: white">Terima</a>
               <a class="btn btn-sm bg-danger" style="color: white" data-toggle="modal" data-target="#exampleModal">
                 Tolak
