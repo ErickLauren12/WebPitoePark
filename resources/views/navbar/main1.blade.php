@@ -67,7 +67,7 @@
             <a class="nav-link {{ ($title === "Location") ? 'active' : '' }}" href={{ url("/location") }}>Lokasi</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ ($title === "Cafe") ? 'active' : '' }}" href={{ url("/cafe") }}>Cafe</a>
+            <a class="nav-link {{ ($title === "Cafe") ? 'active' : '' }}" href={{ url("/order") }}>Cafe</a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{ ($title === "Facility") ? 'active' : '' }}" href={{ url("/facility") }}>Fasilitas</a>

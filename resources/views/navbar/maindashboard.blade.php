@@ -98,13 +98,35 @@
               Manajemen Event
             </a>
           </li>
-
           <li style="margin-bottom: 10px" class="nav-item">
-            <a class="nav-link" aria-current="page" href="{{ url("/cafe/dashboard") }}">
-              <span data-feather="layers"></span>
-              Manajemen Menu Cafe
-            </a>
+                <a class="nav-link" aria-current="page" href="{{ url("/qrcode") }}">
+                  <span data-feather="layers"></span>
+                  Manajemen Meja
+                </a>
+              </li>
+          <li style="margin-bottom: 10px" class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ url("/cafe/dashboard") }}">
+                  <span data-feather="layers"></span>
+                  Manajemen Menu Cafe
+                </a>
           </li>
+
+              @if (auth()->user()->is_admin === 1)
+              <li style="margin-bottom: 10px" class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ url("/reservation") }}">
+                  <span data-feather="layers"></span>
+                  Manajemen Reservasi
+                </a>
+              </li>
+              @else
+              <li style="margin-bottom: 10px" class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ url("/reservation/statistics") }}">
+                  <span data-feather="layers"></span>
+                  Statistik Reservasi
+                </a>
+              </li>
+              @endif
+              
 
           <li style="margin-bottom: 10px" class="nav-item">
             <a class="nav-link" aria-current="page" href="{{ url("/category") }}">
@@ -172,6 +194,12 @@
                   Manajemen Akun Pegawai
                 </a>
               </li> 
+              <li style="margin-bottom: 10px" class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ url("/qrcode") }}">
+                  <span data-feather="layers"></span>
+                  Manajemen Meja
+                </a>
+              </li>
               @endif
 
               <li style="margin-bottom: 10px" class="nav-item">
