@@ -13,6 +13,9 @@ class MejaSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('mejas')->insert(['no_meja' => '1', 'link'=>'google.com']);
+        DB::table('mejas')->insert([
+            'no_meja' => '1',
+            'link' => 'google.com',      
+        ]);
     }
 }
