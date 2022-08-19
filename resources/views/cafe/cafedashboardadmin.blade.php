@@ -15,6 +15,12 @@
       </div>
   </form>
   </div>
+  <div style="margin: 30px">
+    <p>Download</p>
+    <a href="{{ url('cafe/extract/1') }}" class="btn btn-info">Excel</a>
+    <a href="{{ url('cafe/extract/2') }}" class="btn btn-info">CSV</a>
+    <a href="{{ url('cafe/extract/3') }}" class="btn btn-info">PDF</a>
+  </div>
 <div class="table-responsive">
   @if (session()->has('success'))
   <div class="alert alert-success" role="alert">
