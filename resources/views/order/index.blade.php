@@ -47,7 +47,7 @@
                             <div class="card mb-4 product-wap rounded-0">
                                 <a href="{{route('order.detail',$item->id)}}" style="text-decoration: none">
                                 <div class="card rounded-0">
-                                    <img class="card-img rounded-0" src="{{asset('assets/img/'. $item->image)}}" style="width:100%; height: 250px; ">
+                                    <img class="card-img rounded-0" src="{{asset('assets/img/Cafe'. $item->image)}}" style="width:100%; height: 250px; ">
                                 </div>
                                 <div class="card-body">
                                     <span class="badge badge-primary">{{ $item->name }}</span><br>
