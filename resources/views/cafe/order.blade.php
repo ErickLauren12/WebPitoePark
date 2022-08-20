@@ -9,6 +9,12 @@
 </style>
 <div class="container marketing">
     <div style="margin-bottom: 20px"><h1>Order Pesanan Cafe</h1></div>
+    <div style="margin: 30px">
+    <p>Download</p>
+    <a href="{{ url('order/extract/1') }}" class="btn btn-info">Excel</a>
+    <a href="{{ url('order/extract/2') }}" class="btn btn-info">CSV</a>
+    <a href="{{ url('order/extract/3') }}" class="btn btn-info">PDF</a>
+  </div>
 
     @if (session()->has('success'))
     <div class="alert alert-success" role="alert">
