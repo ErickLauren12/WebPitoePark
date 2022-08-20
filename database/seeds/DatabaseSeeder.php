@@ -11,6 +11,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(AccountSeeder::class);
+Cafe-Feature
+        $this->call([AccountSeeder::class,
+                    MejaSeeder::class, 
+                    ]);
     }
 }

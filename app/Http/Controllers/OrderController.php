@@ -9,8 +9,11 @@ use App\Meja;
 use Auth;
 use Session;
 use Illuminate\Support\Str;
-
+use App\Exports\OrderExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Facades\Datatables;
 
 class OrderController extends Controller
 {
@@ -47,6 +50,22 @@ class OrderController extends Controller
         $session = Session::get('nomor_meja');
 
         return view('order.index', compact('title', 'cafe', 'mejas', 'orders', 'random', 'total_harga'));
+    }
+
+    public function extractData(Request $request){
+        if($request['number'] === "1"){
+            return Excel::download(new OrderExport,"DataOrder.xlsx");
+        }else if($request['number'] === "2"){
+            return Excel::download(new OrderExport,"DataOrder.csv");
+        }else{
+            //return Excel::download(new NewsExport,"DataOrder.pdf");
+
+            $data = Order::all();
+            view()->share("order",$data);
+            $pdf = \PDF::loadView('extract.order');
+            return $pdf->download("DataOrder.pdf");
+        }
+        
     }
 
     public function detail($id)

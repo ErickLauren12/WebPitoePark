@@ -80,6 +80,8 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/cafe/search', [CafeController::class, 'search']);
     Route::get('cafe/extract/{number}',[CafeController::class, 'extractData']);
     Route::get('cafe/extract',[CafeController::class, 'exportData']);
+    Route::get('order/extract/{number}',[OrderController::class, 'extractData']);
+    Route::get('order/extract',[OrderController::class, 'exportData']);
 
     Route::post('/category/create', [CategoryFoodController::class, 'store']);
     Route::delete('/category/delete/{categoryFood}', [CategoryFoodController::class, 'destroy']);
