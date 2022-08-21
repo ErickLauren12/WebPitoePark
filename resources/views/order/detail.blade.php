@@ -29,7 +29,7 @@
         <form action="{{route('order.store', $data[0]->id)}}" method="POST">
         @csrf
         <center>
-            <img src="{{asset('assets/img/'. $ca->image)}}" alt="Snow" style="max-width: 600px; height: 400px;">
+            <img src="{{asset('assets/img/Cafe'. $ca->image)}}" alt="Snow" style="max-width: 600px; height: 400px;">
             <div class="text-center mt-0">
                 <label for="name" class="text-center"><b>{{$ca->name}} <br> Rp.{{$ca->price}}/pcs</b></label><br>
                 <input type="number" name="jumlah" style="width: 100%;">
