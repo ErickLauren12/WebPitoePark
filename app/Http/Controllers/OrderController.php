@@ -47,14 +47,6 @@ class OrderController extends Controller
         {
             $total_harga += $orders[$i]->total_price;
         }
-        $session = "";
-        $meja = "";
-        if(Session::get('nomor_meja')) 
-        {
-        $session = Session::get('nomor_meja');
-        $meja = Meja::where('id', $session)->get();
-        Session::put('nomor_meja', $meja[0]->no_meja);
-        }
 
 
         return view('order.index', compact('title', 'cafe', 'mejas', 'orders', 'random', 'total_harga'));
@@ -101,6 +93,12 @@ class OrderController extends Controller
         }
 
         $session = Session::get('nomor_meja');
+
+        if(!$session)
+        {
+            return back()->with('failed', "Harap Melakukan Scan Qr Code ketika akan memesan");
+        }
+
         $title = "Order";
         $order = new Order();
         $order->keterangan = $keterangn;
