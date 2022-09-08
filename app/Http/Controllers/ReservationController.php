@@ -202,16 +202,16 @@ class ReservationController extends Controller
             'facility_id' => ['required'],
             'category_id' => ['required'],
         ]);
-        /*
+        
         if(Reservation::where('start_date','<=',$credentials['start_date'])->where('end_date','>=',$credentials['start_date'])->where('facility_id','=',$credentials['facility_id'])->count() == 0){
             AppReservation::create($credentials);
             return redirect('/reservation')->with('success','New Reservation Has Been Added');
         }else{
             return redirect('/reservation/create')->with('fail','The Reservation has allready added');
-        }*/
-
+        }
+        /*
         AppReservation::create($credentials);
-        return redirect('/reservation')->with('success', 'Reservasi baru ditambahkan');
+        return redirect('/reservation')->with('success', 'Reservasi baru ditambahkan');*/
     }
 
     /**
