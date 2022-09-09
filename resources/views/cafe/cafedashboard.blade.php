@@ -47,7 +47,7 @@
         <tr>
             <td>{{ $loop->iteration }}</td>
             <td>{{ $item['name'] }}</td>
-            <td><img style="width: 150px; height:90px;" src="{{ asset('assets/img/Cafe' . $item['image']) }}"></td>
+            <td><img style="width: 150px; height:90px;" src="{{ asset('assets/img/' . $item['image']) }}"></td>
             <td>Rp.{{ $item['price'] }}</td>
             <td>{{ $item->category->name }}</td>
             <td>
