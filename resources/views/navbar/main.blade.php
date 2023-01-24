@@ -74,9 +74,9 @@ https://templatemo.com/tm-559-zay-shop
                           <!-- <li class="nav-item">
                             <a class="nav-link {{ ($title === "Cafe") ? 'active' : '' }}" href={{ url("/cafe") }}>Cafe</a>
                           </li> -->
-                          <li class="nav-item">
+                          {{-- <li class="nav-item">
                             <a class="nav-link {{ ($title === "Order") ? 'active' : '' }}" href={{ url("/order") }}>Order</a>
-                          </li>
+                          </li> --}}
                           <li class="nav-item">
                             <a class="nav-link {{ ($title === "Facility") ? 'active' : '' }}" href={{ url("/facility") }}>Fasilitas</a>
                           </li>
