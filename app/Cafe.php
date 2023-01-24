@@ -11,7 +11,7 @@ class Cafe extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name', 'image', 'price', 'account_id', 'category_id'
+        'name', 'image', 'price', 'account_id', 'category_id', 'action',
     ];
 
     public function scopeFilter($query, array $filter){

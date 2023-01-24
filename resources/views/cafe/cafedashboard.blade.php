@@ -7,6 +7,7 @@
     <a href="/cafe/create" class="btn btn-primary mb-3">Buat Menu Baru</a>
     <a href="{{route('order.pesanan.cafe')}}" class="btn btn-danger mb-3">Order Pesanan</a>
     <a href="{{route('order.pesanan.process')}}" class="btn btn-warning mb-3">Proses Order</a>
+    <a href="{{route('order.history')}}" class="btn btn-primary mb-3">History Pesanan</a>
     <div style="margin-top: 30px">
       <p>Cari Nama Makanan:</p>
       <form action="{{ url('/cafe/search') }}">
@@ -39,6 +40,7 @@
           <th scope="col">Gambar</th>
           <th scope="col">Harga</th>
           <th scope="col">Kategori</th>
+          <th scope="col">Status Makanan</th>
           <th scope="col">Aksi</th>
         </tr>
       </thead>
@@ -50,6 +52,11 @@
             <td><img style="width: 150px; height:90px;" src="{{ asset('assets/img/' . $item['image']) }}"></td>
             <td>Rp.{{ $item['price'] }}</td>
             <td>{{ $item->category->name }}</td>
+            @if($item->action == "true")
+            <td>Tersedia</td>
+            @else
+            <td>Tidak Tersedia</td>
+            @endif
             <td>
               <a href="/cafe/{{ $item['id'] }}/edit" class="btn btn-warning mb-3" style="color: white">Edit</a>
 

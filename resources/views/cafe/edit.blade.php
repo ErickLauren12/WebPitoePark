@@ -10,10 +10,10 @@
     @csrf
     <div class="mb-3">
       <label for="name" class="form-label">Name</label>
-      @error('name')
-            <p class="text-danger">{{ $message }}</p>
-        @enderror
       <input type="text" class="form-control" id="name" name="name" autofocus value="{{ old('name', $cafe->name) }}">
+      @error('name')
+      <p class="text-danger">{{ $message }}</p>
+  @enderror
     </div>
 
     <div class="mb-3">
@@ -25,17 +25,15 @@
         <img class="img-preview img-fluid mb-3 col-sm-5 d-block" alt="">
       @endif
       <input class="form-control" @error('image') is-invalid @enderror type="file" id="image" name="image" onchange="previewImage()">
-      @error('image')
-            <p class="text-danger">{{ $message }}</p>
-        @enderror
     </div>
 
     <div class="mb-3">
       <label for="title" class="form-label">Price</label>
-      @error('price')
-            <p class="text-danger">{{ $message }}</p>
-        @enderror
+
       <input type="number" class="form-control" id="price" name="price" autofocus value="{{ old('price',$cafe->price) }}">
+      @error('price')
+      <p class="text-danger">{{ $message }}</p>
+  @enderror
     </div>
 
     <div class="mb-3">
@@ -46,11 +44,20 @@
             <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
           @else
             <option value="{{ $item->id }}">{{ $item->name }}</option>
-          @endif 
-        @endforeach  
+          @endif
+        @endforeach
       </select>
     </div>
-   
+
+    <div class="mb-3">
+        <label for="" class="form-label">Ketersediaan Menu</label>
+        <select class="custom-select" name="action" id="action">
+            <option value="true">Tersedia</option>
+            <option value="false">Tidak Tersedia</option>
+        </select>
+
+    </div>
+
     <button type="submit" class="btn btn-primary">Edit Menu</button>
   </form>
 </div>

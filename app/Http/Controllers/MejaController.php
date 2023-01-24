@@ -24,7 +24,10 @@ class MejaController extends Controller
     public function generate ($id)
     {
         $meja = Meja::findOrFail($id);
-        $qrcode = QrCode::size(400)->generate($meja->link);
+        $meja->link = md5($id);
+        $meja->save();
+        $qrcode = QrCode::size(400)->generate(route('order.generate', ['hash' => $meja->link]));
+
         return view('qrcode.detail', compact('qrcode'));
     }
 }

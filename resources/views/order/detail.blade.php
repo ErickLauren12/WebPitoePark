@@ -21,15 +21,21 @@
         clear: both;
         display: table;
     }
+
+    .detail-image {
+        width: 100%;
+        max-width: 400px;
+        max-height: 600px;
+    }
 </style>
 
 <div class="row">
     @foreach ( $data as $ca)
     <div class="column">
-        <form action="{{route('order.store', $data[0]->id)}}" method="POST">
+        <form action="{{route('order.store', ['id' => $data[0]->id, 'hash' => $hash])}}" method="POST">
         @csrf
         <center>
-            <img src="{{asset('assets/img/Cafe'. $ca->image)}}" alt="Snow" style="max-width: 600px; height: 400px;">
+            <img src="{{ asset('assets/img/' . $ca['image']) }}" alt="Snow" class="detail-image">
             <div class="text-center mt-0">
                 <label for="name" class="text-center"><b>{{$ca->name}} <br> Rp.{{$ca->price}}/pcs</b></label><br>
                 <input type="number" name="jumlah" style="width: 100%;">

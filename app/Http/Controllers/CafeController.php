@@ -13,6 +13,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\Datatables;
+use DB;
+use PDF;
 
 class CafeController extends Controller
 {
@@ -39,7 +41,7 @@ class CafeController extends Controller
         'orders.jumlah', 'cafes.price', 'orders.keterangan', 'orders.name', 'orders.no_order')
             ->where('orders.status_order', 'Success')
             ->join('cafes', 'cafes.id', '=', 'orders.cefes_id')
-            ->orderBy('orders.created_at', 'ASC')->get();
+            ->orderBy('orders.created_at', 'ASC')->paginate(10);
         return view('cafe.process', compact('orders'));
     }
 
@@ -83,6 +85,24 @@ class CafeController extends Controller
         return view('cafe.order', compact('order','total_harga'));
     }
 
+    public function pesananMasuk(Request $request)
+    {
+        $order = Order::where('orders.status_order', 'Processing')->groupBy('no_order')
+                ->when($request->search, function ($q) use ($request) {
+                 return $q->where('name', 'like', '%' . $request->search . '%');
+                })->orderBy('created_at', 'DESC')->paginate(10);
+        return view('cafe.pesanan-masuk', compact('order'));
+    }
+
+    public function detailPesananMasuk($id)
+    {
+        $order = Order::select('cafes.name as pesanan', 'cafes.price', 'orders.keterangan', 'orders.jumlah', 'orders.total_price', 'orders.name')
+                ->where('orders.status_order', 'Processing')
+                ->where('orders.id', $id)
+                ->join('cafes', 'cafes.id', '=', 'orders.cefes_id')->orderBy('orders.created_at', 'ASC')->paginate(10);
+        return view('cafe.detail-pesanan-masuk', compact('order'));
+    }
+
     public function processOrder(Request $request)
     {
         $order = [];
@@ -97,13 +117,18 @@ class CafeController extends Controller
             return back()->with('failed', "Pesanan tidak ditemukan");
         }
 
+        // $verif_code = random_int(10000, 99999);
+
         for($i=0; $i < count($order); $i++)
         {
             $data[$i] = Order::where('id', $request->id[$i])->first();
             $data[$i]->status_order = "Success";
+            // $data[$i]->jenis_pembayaran = $request->jenis_pembayaran;
+            // $data[$i]->kode_verifikasi = $verif_code;
+            $data[$i]->no_wa = $request->no_wa;
             $data[$i]->save();
         }
-        return redirect('/cafe/order/pesanan')->with('success', "Pesanan Berhasil di proses dengan nomor order : ". $request->result);
+        return back('/cafe/order/pesanan')->with('order_complete', ['no_order' => $request->result]);
     }
 
     public function getData()
@@ -161,14 +186,20 @@ class CafeController extends Controller
 
     public function store(Request $request)
     {
+
         $credentials = $request->validate([
             'name' => ['required', 'max:255'],
-            'image' => ['image', 'file'],
+            'image' => ['required', 'file'],
             'price' => ['required'],
-            'category_id' => ['required']
+            'category_id' => ['required'],
+        ], [
+            'name.required' => 'Name tidak boleh kosong.',
+            'image.required'=>'Image tidak boleh kosong.',
+            'price.required'=>'Price tidak boleh kosong.',
+            'image.numeric'=>'Price harus berupa angka.',
         ]);
 
-
+        $credentials['action'] = 'true';
         $credentials['account_id'] = auth()->user()->id;
         $result = Cafe::create($credentials);
 
@@ -212,6 +243,38 @@ class CafeController extends Controller
         //
     }
 
+    public function history(Request $request)
+    {
+        $history = Order::select(
+                        'name',
+                        'meja_id',
+                        'no_order',
+                        'jenis_pembayaran',
+                        'kode_verifikasi',
+                        'created_at',
+                        'no_wa',
+                        'status_order',
+                        DB::raw('SUM(total_price) as total_price'),
+                        DB::raw('CONCAT("https://wa.me/62",
+                            no_wa,
+                            "/?text=Pembayaran%20pada%20Cafe%20Kendie%20Pitoe%20Park%20Berhasil.%0aKode%20Verifikasi:%20",
+                            kode_verifikasi, "%0aTotal:%20Rp.", SUM(total_price), "%0a", created_at ) as wa_verif'))
+                    ->where('status_order', '!=', 'Pending')
+                    ->where('status_order', '!=', 'Processing')
+                    ->when($request->search, function ($q) use ($request) {
+                        return $q->where('name', 'like', '%' . $request->search . '%');
+                    })
+                    ->groupBy('no_order','kode_verifikasi')->orderBy('updated_at', 'DESC')->paginate(10);
+
+        $jumlah = 0;
+        for($i=0; $i < count($history); $i++)
+        {
+            $jumlah += $history[$i]->total_price;
+        }
+
+        return view('cafe.history', compact('history', 'jumlah'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -239,7 +302,7 @@ class CafeController extends Controller
             $pdf = \PDF::loadView('extract.cafe');
             return $pdf->download("DataCafe.pdf");
         }
-        
+
     }
 
     /**
@@ -255,19 +318,29 @@ class CafeController extends Controller
             'name' => ['required', 'max:255'],
             'image' => ['image', 'file'],
             'price' => ['required'],
-            'category_id' => ['required']
+            'category_id' => ['required'],
+            'action'=>['required']
+        ],[
+            'name.required' => 'Name tidak boleh kosong.',
+            'price.required'=>'Price tidak boleh kosong.',
         ]);
 
         $credentials['account_id'] = auth()->user()->id;
 
-        if ($request->file('image')) {
-            if ($cafe['image']) {
-                Storage::delete($cafe['image']);
-            }
-            $credentials['image'] = $request->file('image')->store('cafe-image');
+        $result = Cafe::where('id', $cafe['id'])->first();
+        $result->update($credentials);
+        if(!empty($credentials['image']))
+        {
+            $file = $credentials['image'];
+            $filename = "product_".time() . '.' . $file->getClientOriginalExtension();
+            $filePath = base_path("public/assets/img");
+            $file->move($filePath, $filename);
+            $result->update([
+                "image" => $filename
+            ]);
         }
 
-        Cafe::where('id', $cafe['id'])->update($credentials);
+
 
         $log = new LogCafe();
         $log->action = "Mengubah";

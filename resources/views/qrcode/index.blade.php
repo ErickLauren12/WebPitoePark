@@ -42,7 +42,7 @@
                      @foreach ($meja as $meja)
                      <tr>
                         <td>{{ $meja->no_meja }}</td>
-                        <td>{{ $meja->link }}</td>
+                        <td>{{  route('order.generate', ['hash' => $meja->link]) }} </td>
                         <td>
                             <a href="{{ route('meja.generate',$meja->id) }}" class="btn btn-primary">Generate</a>
                         </td>

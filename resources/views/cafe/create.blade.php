@@ -9,29 +9,29 @@
 <form method="post" action="{{ url('/cafe/create') }}" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
-      <label for="name" class="form-label">Nama:</label>
-      @error('name')
+        <label for="name" class="form-label">Nama:</label>
+        <input type="text" class="form-control" id="name" name="name" autofocus value="{{ old('name') }}">
+        @error('name')
             <p class="text-danger">{{ $message }}</p>
         @enderror
-      <input type="text" class="form-control" id="name" name="name" autofocus value="{{ old('name') }}">
     </div>
 
     <div class="mb-3">
       <label for="image" class="form-label">Upload Gambar</label>
 
-      <img class="img-preview img-fluid mb-3 col-sm-5" alt="">
-      @error('image')
+        <img class="img-preview img-fluid mb-3 col-sm-5" alt="">
+        <input class="form-control" @error('image') is-invalid @enderror type="file" id="image" name="image" onchange="previewImage()">
+        @error('image')
             <p class="text-danger">{{ $message }}</p>
-      @enderror
-      <input class="form-control" @error('image') is-invalid @enderror type="file" id="image" name="image" onchange="previewImage()">
+        @enderror
     </div>
 
     <div class="mb-3">
-      <label for="title" class="form-label">Harga</label>
-      @error('price')
+        <label for="title" class="form-label">Harga</label>
+        <input type="number" class="form-control" id="price" name="price" autofocus value="{{ old('price') }}">
+        @error('price')
             <p class="text-danger">{{ $message }}</p>
         @enderror
-      <input type="number" class="form-control" id="price" name="price" autofocus value="{{ old('price') }}">
     </div>
 
     <div class="mb-3">
@@ -39,10 +39,10 @@
       <select class="custom-select" name="category_id">
         @foreach ($category as $item)
           <option value="{{ $item->id }}">{{ $item->name }}</option>
-        @endforeach  
+        @endforeach
       </select>
     </div>
-   
+
     <button type="submit" class="btn btn-primary">Create Menu</button>
   </form>
 </div>

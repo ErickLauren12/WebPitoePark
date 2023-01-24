@@ -24,6 +24,9 @@ class CreateOrdersTable extends Migration
             $table->string('jumlah', 5);
             $table->string('no_order', 5);
             $table->string('name', 45);
+            $table->string('jenis_pembayaran', 45);
+            $table->string('kode_verifikasi', 255);
+            $table->string('no_wa', 45);
 
             $table->foreign('meja_id')->references('id')->on('mejas');          
         });

@@ -52,6 +52,9 @@
 
       </tbody>
     </table>
+    <div class="ppppp" style="display:flex; align-items: center; justify-content: center;">
+        {{$orders->links()}}
+    </div>
   </div>
 </div>
 @endsection

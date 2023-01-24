@@ -18,12 +18,13 @@ class CreateCafesTable extends Migration
             $table->string("name");
             $table->string('image');
             $table->string('price');
-            $table->string("status")->default("Pending");
+            $table->string("status")->default("true");
             $table->string("message")->nullable();
             $table->unsignedBigInteger('account_id');
             $table->unsignedBigInteger('category_id');
             $table->softDeletes();
             $table->timestamps();
+            $table->string('action', 10);
         });
     }
 

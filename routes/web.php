@@ -39,7 +39,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/order/cekpesanan', [OrderController::class, 'cekPesanan'])->name('order.cekPesanan');
 Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/about', function () {
@@ -64,6 +64,12 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::post('/galery/upload', [GaleryController::class, 'store']);
     Route::delete('/galery/delete/{galery}', [GaleryController::class, 'destroy']);
 
+    Route::get('/cafe/history', [CafeController::class, 'history'])->name('order.history');
+
+    Route::get('/cafe/pesanan-masuk', [CafeController::class, 'pesananMasuk'])->name('pesanan.masuk');
+    Route::get('/cafe/pesanan-masuk/{id}', [CafeController::class, 'detailPesananMasuk'])->name('detail.pesanan.masuk');
+
+
     Route::get('/cafe/create', [CafeController::class, 'create']);
     Route::post('/cafe/create', [CafeController::class, 'store']);
     Route::delete('/cafe/delete/{cafe}', [CafeController::class, 'destroy']);
@@ -81,7 +87,9 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::get('cafe/extract/{number}',[CafeController::class, 'extractData']);
     Route::get('cafe/extract',[CafeController::class, 'exportData']);
     Route::get('order/extract/{number}',[OrderController::class, 'extractData']);
+    Route::get('order/nota/{no_order}',[OrderController::class, 'notaOrder'])->name('order.viewnota');
     Route::get('order/extract',[OrderController::class, 'exportData']);
+    Route::get('order/delete/{id}', [OrderController::class, 'destroyOrder'])->name('order.delete.index');
 
     Route::post('/category/create', [CategoryFoodController::class, 'store']);
     Route::delete('/category/delete/{categoryFood}', [CategoryFoodController::class, 'destroy']);
@@ -123,13 +131,13 @@ Route::group(['middleware' => 'is_admin'], function () {
 
 Route::group(['middleware' => 'is_super_admin'], function () {
     Route::get('/employee', [AccountController::class, 'index']);
-    
+
     Route::post('/register', [AccountController::class, 'store']);
     Route::get('/register', [AccountController::class, 'index']);
-    
+
     Route::get('/galery/dashboard', [GaleryController::class, 'dashboard']);
     Route::get('/galery/confirmation/{galery}', [GaleryController::class, 'confirmation']);
-    
+
     Route::delete('/employee/delete/{account}', [AccountController::class, 'destroy']);
     Route::get('/employee/search', [AccountController::class, 'search']);
 
@@ -172,14 +180,19 @@ Route::get('/location', [Location::class, 'index']);
 
 Route::get('/cafe', [CafeController::class, 'index']);
 
-Route::get('/order', [OrderController::class, 'index']);
-Route::get('/order/{id}', [OrderController::class, 'detail'])->name('order.detail');
-Route::post('/order/{id}', [OrderController::class, 'store'])->name('order.store');
-Route::get('/delete/{id}', [OrderController::class, 'delete'])->name('order.delete.cafe');
+Route::get('/order_sign/{hash}', [OrderController::class, 'generateSignedUrl'])->name('order.generate');
+Route::group(['middleware' => 'verify_link'], function () {
+    Route::get('/order/{hash}', [OrderController::class, 'index'])->name('order.index');
+    Route::get('/order/{hash}/{id}', [OrderController::class, 'detail'])->name('order.detail');
+    Route::post('/order/{hash}/{id}', [OrderController::class, 'store'])->name('order.store');
+    Route::get('/delete/{hash}/{id}', [OrderController::class, 'delete'])->name('order.delete');
+});
 
 Route::post('/process', [OrderController::class, 'process'])->name('order.process');
+
 
 Route::get('/category', [CategoryFoodController::class, 'index']);
 
 Route::get('/facility', [FacilityController::class, 'index']);
 Route::get('/facilty/detail/{cari}', [FacilityController::class, 'detail']);
+

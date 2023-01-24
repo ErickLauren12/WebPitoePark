@@ -11,7 +11,6 @@
         <th scope="col">id</th>
         <th scope="col">Keterangan</th>
         <th scope="col">Status</th>
-        <th scope="col">Nomor Meja</th>
         <th scope="col">Total Harga</th>
         <th scope="col">Jumlah</th>
         <th scope="col">Nomor Order</th>
@@ -24,11 +23,10 @@
         <td>{{ $loop->iteration }}</td>
             <td>{{ $item->keterangan }}</td>
             <td>{{ $item->status_order }}</td>
-            <td>{{ $item->meja->no_meja }}</td>
             <td>Rp.{{ $item->total_price }}</td>
-            <td>Rp.{{ $item->jumlah }}</td>
-            <td>Rp.{{ $item->no_order }}</td>
-            <td>Rp.{{ $item->name }}</td>
+            <td>{{ $item->jumlah }}</td>
+            <td>{{ $item->no_order }}</td>
+            <td>{{ $item->name }}</td>
           </tr>
         @endforeach
         
